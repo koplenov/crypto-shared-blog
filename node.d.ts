@@ -3052,6 +3052,9 @@ declare namespace $ {
     }
 }
 
+declare namespace $ {
+}
+
 declare namespace $.$$ {
     class $blog extends $.$blog {
         text(id: any, next?: any): string;

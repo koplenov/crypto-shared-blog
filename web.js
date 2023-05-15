@@ -10323,6 +10323,13 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $mol_style_attach("blog/view.tree.css", "[blog_note]{\n\tflex: 1 0 40rem\n}\n");
+})($ || ($ = {}));
+//blog/-css/view.tree.css.ts
+;
+"use strict";
+var $;
+(function ($) {
     var $$;
     (function ($$) {
         class $blog extends $.$blog {
