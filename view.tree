@@ -1,0 +1,26 @@
+$blog $mol_book2_catalog
+	plugins / <= Theme $mol_theme_auto
+	yard $hyoo_sync_client
+	menu_tools /
+		<= Online $hyoo_sync_online
+			yard <= yard
+		<= Lighter $mol_lights_toggle
+		<= Add_note $mol_button_minor
+			click <= add_note null
+			sub / <= add_icon $mol_icon_plus
+	menu_title \Список постов
+	spreads <= notes_view /
+	Note* $mol_page
+		tools /
+			<= Share_note* $mol_link
+				target \_blank
+				uri <= share_note* null
+				sub / <= share_icon $mol_icon_share
+			<= Spread_close
+		Title <= Note_title* $mol_string_button
+			value? <=> current_title*? \Пустой заголовок
+		title <= current_title*
+		body /
+			<= Input* $mol_textarea
+				value? <=> text*? \
+				enabled <= i_can_mod* false
