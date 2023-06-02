@@ -13045,7 +13045,7 @@ var $;
 (function ($) {
     class $blog extends $mol_book2_catalog {
         param() {
-            return "post_id";
+            return "post";
         }
         plugins() {
             return [
@@ -13965,7 +13965,7 @@ var $;
                 this.user().posts().item_make();
             }
             share_note(post) {
-                return $mol_state_arg.make_link({ post_id: post.id() });
+                return $mol_state_arg.make_link({ [this.param()]: post.id() });
             }
             seed_id(id) {
                 return id;

@@ -830,7 +830,7 @@ $mol_text_list_item $mol_paragraph
 		mol_text_list_item_index <= index 0
 
 $blog $mol_book2_catalog
-	param \post_id
+	param \post
 	plugins / <= Theme $mol_theme_auto
 	yard $hyoo_sync_client
 	menu_tools /
