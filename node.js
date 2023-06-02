@@ -14287,14 +14287,9 @@ var $;
             }
             spreads() {
                 return this.user().posts().items().map(post => this.Note(post));
-                return this.user().posts().items().reduce((dict, post) => {
-                    dict[post.id()] = this.Note(post);
-                    return dict;
-                }, {});
             }
             Spread() {
-                return this.spreads()[this.spread()]
-                    || this.yard().world().Fund($blog_post).Item(this.spread());
+                return super.Spread() ?? this.Note(this.user().posts().item(this.spread()));
             }
             add_note() {
                 this.user().posts().item_make();
@@ -14343,6 +14338,9 @@ var $;
         __decorate([
             $mol_mem
         ], $blog.prototype, "spreads", null);
+        __decorate([
+            $mol_mem
+        ], $blog.prototype, "Spread", null);
         __decorate([
             $mol_action
         ], $blog.prototype, "add_note", null);
