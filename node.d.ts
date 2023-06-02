@@ -3846,7 +3846,6 @@ declare namespace $.$$ {
         text(post: $blog_post, next?: any): string;
         current_title(post: $blog_post, next?: string): string;
         i_can_mod(id: $mol_int62_string): boolean;
-        root_id(): `${string}_${string}`;
         spreads(): any;
         Spread(): any;
         add_note(): void;

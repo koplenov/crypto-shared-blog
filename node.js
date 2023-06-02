@@ -14278,13 +14278,6 @@ var $;
             i_can_mod(id) {
                 return this.yard().land(id).allowed_mod();
             }
-            root_id() {
-                const key = "root_id";
-                let id = $mol_state_local.value(key);
-                if (id === null)
-                    id = $mol_state_local.value(key, this.yard().land_grab().id());
-                return id;
-            }
             spreads() {
                 return this.user().posts().items().reduce((dict, post) => {
                     dict[post.id()] = this.Note(post);
@@ -14335,9 +14328,6 @@ var $;
         __decorate([
             $mol_mem_key
         ], $blog.prototype, "i_can_mod", null);
-        __decorate([
-            $mol_mem
-        ], $blog.prototype, "root_id", null);
         __decorate([
             $mol_mem
         ], $blog.prototype, "spreads", null);
