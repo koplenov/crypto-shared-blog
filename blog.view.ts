@@ -67,7 +67,7 @@ namespace $.$$ {
 		}
 
 		share_note( post: $blog_post ) {
-			return $mol_state_arg.make_link( { post_id: post.id() } )
+			return $mol_state_arg.make_link( { [this.param()]: post.id() } )
 		}
 
 		@$mol_mem
