@@ -23,8 +23,8 @@ namespace $.$$ {
 		}
 
 		@$mol_mem_key
-		i_can_mod( id: $mol_int62_string ) {
-			return this.yard().land( id ).allowed_mod()
+		i_can_mod( post: $blog_post ) {
+			return post.land.allowed_mod()
 		}
 
 		@$mol_mem
