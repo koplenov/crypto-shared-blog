@@ -28,15 +28,6 @@ namespace $.$$ {
 		}
 
 		@$mol_mem
-		root_id() {
-			const key = "root_id"
-			let id = $mol_state_local.value( key )
-			if( id === null )
-				id = $mol_state_local.value( key, this.yard().land_grab().id() )
-			return id as $mol_int62_string
-		}
-
-		@$mol_mem
 		spreads() {
 			return this.user().posts().items().reduce( ( dict, post ) => {
 				dict[ post.id() ] = this.Note( post )
