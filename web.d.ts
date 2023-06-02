@@ -14,21 +14,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_fail(error: any): never;
-}
-
-declare namespace $ {
-    function $mol_fail_hidden(error: any): never;
-}
-
-declare namespace $ {
-    function $mol_offline(uri?: string): void;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
     const $mol_ambient_ref: unique symbol;
     type $mol_ambient_context = $;
     function $mol_ambient(this: $ | void, overrides: Partial<$>): $;
@@ -53,6 +38,14 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_fail(error: any): never;
+}
+
+declare namespace $ {
+    function $mol_fail_hidden(error: any): never;
+}
+
+declare namespace $ {
     type $mol_type_writable<T> = {
         -readonly [P in keyof T]: T[P];
     };
@@ -61,6 +54,7 @@ declare namespace $ {
 declare namespace $ {
     class $mol_object2 {
         static $: typeof $$;
+        [Symbol.toStringTag]: string;
         [$mol_ambient_ref]: typeof $$;
         get $(): $;
         set $(next: $);
@@ -71,128 +65,6 @@ declare namespace $ {
         toString(): string;
         toJSON(): any;
     }
-}
-
-declare namespace $ {
-    class $mol_after_tick extends $mol_object2 {
-        task: () => void;
-        promise: any;
-        cancelled: boolean;
-        constructor(task: () => void);
-        destructor(): void;
-    }
-}
-
-declare namespace $ {
-    var $mol_dom_context: typeof globalThis;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    function $mol_style_attach(id: string, text: string): HTMLStyleElement | null;
-}
-
-declare namespace $ {
-    class $mol_decor<Value> {
-        readonly value: Value;
-        constructor(value: Value);
-        prefix(): string;
-        valueOf(): Value;
-        postfix(): string;
-        toString(): string;
-    }
-}
-
-declare namespace $ {
-    type $mol_style_unit_length = '%' | 'px' | 'cm' | 'mm' | 'Q' | 'in' | 'pc' | 'pt' | 'cap' | 'ch' | 'em' | 'rem' | 'ex' | 'ic' | 'lh' | 'rlh' | 'vh' | 'vw' | 'vi' | 'vb' | 'vmin' | 'vmax';
-    type $mol_style_unit_angle = 'deg' | 'rad' | 'grad' | 'turn';
-    type $mol_style_unit_time = 's' | 'ms';
-    type $mol_style_unit_any = $mol_style_unit_length | $mol_style_unit_angle | $mol_style_unit_time;
-    class $mol_style_unit<Literal extends $mol_style_unit_any> extends $mol_decor<number> {
-        readonly literal: Literal;
-        constructor(value: number, literal: Literal);
-        postfix(): Literal;
-        static per(value: number): $mol_style_unit<"%">;
-        static px(value: number): $mol_style_unit<"px">;
-        static mm(value: number): $mol_style_unit<"mm">;
-        static cm(value: number): $mol_style_unit<"cm">;
-        static Q(value: number): $mol_style_unit<"Q">;
-        static in(value: number): $mol_style_unit<"in">;
-        static pc(value: number): $mol_style_unit<"pc">;
-        static pt(value: number): $mol_style_unit<"pt">;
-        static cap(value: number): $mol_style_unit<"cap">;
-        static ch(value: number): $mol_style_unit<"ch">;
-        static em(value: number): $mol_style_unit<"em">;
-        static rem(value: number): $mol_style_unit<"rem">;
-        static ex(value: number): $mol_style_unit<"ex">;
-        static ic(value: number): $mol_style_unit<"ic">;
-        static lh(value: number): $mol_style_unit<"lh">;
-        static rlh(value: number): $mol_style_unit<"rlh">;
-        static vh(value: number): $mol_style_unit<"vh">;
-        static vw(value: number): $mol_style_unit<"vw">;
-        static vi(value: number): $mol_style_unit<"vi">;
-        static vb(value: number): $mol_style_unit<"vb">;
-        static vmin(value: number): $mol_style_unit<"vmin">;
-        static vmax(value: number): $mol_style_unit<"vmax">;
-        static deg(value: number): $mol_style_unit<"deg">;
-        static rad(value: number): $mol_style_unit<"rad">;
-        static grad(value: number): $mol_style_unit<"grad">;
-        static turn(value: number): $mol_style_unit<"turn">;
-        static s(value: number): $mol_style_unit<"s">;
-        static ms(value: number): $mol_style_unit<"ms">;
-    }
-}
-
-declare namespace $ {
-    type $mol_style_func_name = 'calc' | 'hsla' | 'rgba' | 'var' | 'clamp' | 'url' | 'scale';
-    class $mol_style_func<Name extends $mol_style_func_name, Value = unknown> extends $mol_decor<Value> {
-        readonly name: Name;
-        constructor(name: Name, value: Value);
-        prefix(): string;
-        postfix(): string;
-        static calc<Value>(value: Value): $mol_style_func<"calc", Value>;
-        static vary<Name extends string>(name: Name): $mol_style_func<"var", Name>;
-        static url<Href extends string>(href: Href): $mol_style_func<"url", string>;
-        static hsla(hue: number, saturation: number, lightness: number, alpha: number): $mol_style_func<"hsla", (number | $mol_style_unit<"%">)[]>;
-        static clamp(min: $mol_style_unit<any>, mid: $mol_style_unit<any>, max: $mol_style_unit<any>): $mol_style_func<"clamp", $mol_style_unit<any>[]>;
-        static rgba(red: number, green: number, blue: number, alpha: number): $mol_style_func<"rgba", number[]>;
-        static scale(zoom: number): $mol_style_func<"scale", number[]>;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    const $mol_theme: {
-        back: $mol_style_func<"var", "--mol_theme_back">;
-        hover: $mol_style_func<"var", "--mol_theme_hover">;
-        card: $mol_style_func<"var", "--mol_theme_card">;
-        current: $mol_style_func<"var", "--mol_theme_current">;
-        special: $mol_style_func<"var", "--mol_theme_special">;
-        text: $mol_style_func<"var", "--mol_theme_text">;
-        control: $mol_style_func<"var", "--mol_theme_control">;
-        shade: $mol_style_func<"var", "--mol_theme_shade">;
-        line: $mol_style_func<"var", "--mol_theme_line">;
-        focus: $mol_style_func<"var", "--mol_theme_focus">;
-        field: $mol_style_func<"var", "--mol_theme_field">;
-        image: $mol_style_func<"var", "--mol_theme_image">;
-    };
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    let $mol_gap: {
-        readonly block: $mol_style_func<"var", "--mol_gap_block">;
-        readonly text: $mol_style_func<"var", "--mol_gap_text">;
-        readonly round: $mol_style_func<"var", "--mol_gap_round">;
-        readonly space: $mol_style_func<"var", "--mol_gap_space">;
-        readonly blur: $mol_style_func<"var", "--mol_gap_blur">;
-    };
 }
 
 declare namespace $ {
@@ -227,6 +99,7 @@ declare namespace $ {
         promote(): void;
         fresh(): void;
         complete(): void;
+        get incompleted(): boolean;
         emit(quant?: $mol_wire_cursor): void;
         peer_move(from_pos: number, to_pos: number): void;
         peer_repos(peer_pos: number, self_pos: number): void;
@@ -235,6 +108,7 @@ declare namespace $ {
 
 declare namespace $ {
     interface $mol_wire_sub extends $mol_wire_pub {
+        temp: boolean;
         track_on(): $mol_wire_sub | null;
         track_next(pub?: $mol_wire_pub): $mol_wire_pub | null;
         pub_off(pub_pos: number): void;
@@ -246,6 +120,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    let $mol_wire_auto_sub: $mol_wire_sub | null;
     function $mol_wire_auto(next?: $mol_wire_sub | null): $mol_wire_sub | null;
     const $mol_wire_affected: (number | $mol_wire_sub)[];
 }
@@ -282,6 +157,7 @@ declare namespace $ {
     class $mol_wire_pub_sub extends $mol_wire_pub implements $mol_wire_sub {
         protected pub_from: number;
         protected cursor: $mol_wire_cursor;
+        get temp(): boolean;
         get pub_list(): $mol_wire_pub[];
         track_on(): $mol_wire_sub | null;
         promote(): void;
@@ -310,6 +186,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_promise_like(val: any): val is Promise<any>;
+}
+
+declare namespace $ {
     abstract class $mol_wire_fiber<Host, Args extends readonly unknown[], Result> extends $mol_wire_pub_sub {
         readonly task: (this: Host, ...args: Args) => Result;
         readonly host?: Host | undefined;
@@ -319,15 +199,17 @@ declare namespace $ {
         static plan_task: $mol_after_frame | null;
         static plan(): void;
         static sync(): void;
+        [Symbol.toStringTag]: string;
         cache: Result | Error | Promise<Result | Error>;
         get args(): Args;
         result(): Result | undefined;
+        get incompleted(): boolean;
         field(): string;
         constructor(id: string, task: (this: Host, ...args: Args) => Result, host?: Host | undefined, args?: Args);
         plan(): void;
         reap(): void;
-        toString(): any;
-        toJSON(): any;
+        toString(): string;
+        toJSON(): string;
         get $(): any;
         emit(quant?: $mol_wire_cursor): void;
         fresh(): void;
@@ -359,20 +241,21 @@ declare namespace $ {
 
 declare namespace $ {
     class $mol_wire_task<Host, Args extends readonly unknown[], Result> extends $mol_wire_fiber<Host, Args, Result> {
-        static getter<Host, Args extends readonly unknown[], Result>(task: (this: Host, ...args: Args) => Result): (host: Host, args: Args) => $mol_wire_task<Host, [...Args], Result>;
+        static getter<Host, Args extends readonly unknown[], Result>(task: (this: Host, ...args: Args) => Result): (host: Host, args: Args) => $mol_wire_task<Host, Args, Result>;
+        get temp(): boolean;
         complete(): void;
         put(next: Result | Error | Promise<Result | Error>): Result | Error | Promise<Result | Error>;
     }
 }
 
 declare namespace $ {
-    function $mol_wire_method<Host extends object, Args extends readonly any[], Result>(host: Host, field: PropertyKey, descr?: TypedPropertyDescriptor<(...args: Args) => Result>): {
-        value: (this: Host, ...args: Args) => Result;
+    function $mol_wire_method<Host extends object, Args extends readonly any[]>(host: Host, field: PropertyKey, descr?: TypedPropertyDescriptor<(...args: Args) => any>): {
+        value: (this: Host, ...args: Args) => any;
         enumerable?: boolean | undefined;
         configurable?: boolean | undefined;
         writable?: boolean | undefined;
-        get?: (() => (...args: Args) => Result) | undefined;
-        set?: ((value: (...args: Args) => Result) => void) | undefined;
+        get?: (() => (...args: Args) => any) | undefined;
+        set?: ((value: (...args: Args) => any) => void) | undefined;
     };
 }
 
@@ -385,10 +268,19 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_fail_catch(error: unknown): boolean;
+}
+
+declare namespace $ {
+    function $mol_fail_log(error: unknown): boolean;
+}
+
+declare namespace $ {
     class $mol_wire_atom<Host, Args extends readonly unknown[], Result> extends $mol_wire_fiber<Host, Args, Result> {
         static solo<Host, Args extends readonly unknown[], Result>(host: Host, task: (this: Host, ...args: Args) => Result): $mol_wire_atom<Host, Args, Result>;
         static plex<Host, Args extends readonly unknown[], Result>(host: Host, task: (this: Host, ...args: Args) => Result, key: Args[0]): $mol_wire_atom<Host, Args, Result>;
         static watching: Set<$mol_wire_atom<any, any, any>>;
+        static watcher: $mol_after_frame | null;
         static watch(): void;
         watch(): void;
         resync(args: Args): Error | Result | Promise<Error | Result>;
@@ -434,11 +326,20 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_fail_catch(error: unknown): boolean;
+    var $mol_dom_context: typeof globalThis;
 }
 
 declare namespace $ {
-    function $mol_fail_log(error: unknown): boolean;
+}
+
+declare namespace $ {
+    class $mol_after_tick extends $mol_object2 {
+        task: () => void;
+        promise: any;
+        cancelled: boolean;
+        constructor(task: () => void);
+        destructor(): void;
+    }
 }
 
 declare namespace $ {
@@ -476,7 +377,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_wire_probe<Value>(task: () => Value, next?: Value): Value | undefined;
+    function $mol_wire_probe<Value>(task: () => Value, def?: Value): Value | undefined;
 }
 
 declare namespace $ {
@@ -537,6 +438,112 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_style_attach(id: string, text: string): HTMLStyleElement | null;
+}
+
+declare namespace $ {
+    class $mol_decor<Value> {
+        readonly value: Value;
+        constructor(value: Value);
+        prefix(): string;
+        valueOf(): Value;
+        postfix(): string;
+        toString(): string;
+    }
+}
+
+declare namespace $ {
+    type $mol_style_unit_length = '%' | 'px' | 'cm' | 'mm' | 'Q' | 'in' | 'pc' | 'pt' | 'cap' | 'ch' | 'em' | 'rem' | 'ex' | 'ic' | 'lh' | 'rlh' | 'vh' | 'vw' | 'vi' | 'vb' | 'vmin' | 'vmax';
+    type $mol_style_unit_angle = 'deg' | 'rad' | 'grad' | 'turn';
+    type $mol_style_unit_time = 's' | 'ms';
+    type $mol_style_unit_any = $mol_style_unit_length | $mol_style_unit_angle | $mol_style_unit_time;
+    class $mol_style_unit<Literal extends $mol_style_unit_any> extends $mol_decor<number> {
+        readonly literal: Literal;
+        constructor(value: number, literal: Literal);
+        postfix(): Literal;
+        static per(value: number): `${number}%`;
+        static px(value: number): `${number}px`;
+        static mm(value: number): `${number}mm`;
+        static cm(value: number): `${number}cm`;
+        static Q(value: number): `${number}Q`;
+        static in(value: number): `${number}in`;
+        static pc(value: number): `${number}pc`;
+        static pt(value: number): `${number}pt`;
+        static cap(value: number): `${number}cap`;
+        static ch(value: number): `${number}ch`;
+        static em(value: number): `${number}em`;
+        static rem(value: number): `${number}rem`;
+        static ex(value: number): `${number}ex`;
+        static ic(value: number): `${number}ic`;
+        static lh(value: number): `${number}lh`;
+        static rlh(value: number): `${number}rlh`;
+        static vh(value: number): `${number}vh`;
+        static vw(value: number): `${number}vw`;
+        static vi(value: number): `${number}vi`;
+        static vb(value: number): `${number}vb`;
+        static vmin(value: number): `${number}vmin`;
+        static vmax(value: number): `${number}vmax`;
+        static deg(value: number): `${number}deg`;
+        static rad(value: number): `${number}rad`;
+        static grad(value: number): `${number}grad`;
+        static turn(value: number): `${number}turn`;
+        static s(value: number): `${number}s`;
+        static ms(value: number): `${number}ms`;
+    }
+}
+
+declare namespace $ {
+    type $mol_style_func_name = 'calc' | 'hsla' | 'rgba' | 'var' | 'clamp' | 'url' | 'scale' | 'cubic-bezier';
+    class $mol_style_func<Name extends $mol_style_func_name, Value = unknown> extends $mol_decor<Value> {
+        readonly name: Name;
+        constructor(name: Name, value: Value);
+        prefix(): string;
+        postfix(): string;
+        static calc<Value>(value: Value): $mol_style_func<"calc", Value>;
+        static vary<Name extends string>(name: Name): $mol_style_func<"var", Name>;
+        static url<Href extends string>(href: Href): $mol_style_func<"url", string>;
+        static hsla(hue: number, saturation: number, lightness: number, alpha: number): $mol_style_func<"hsla", (number | `${number}%`)[]>;
+        static clamp(min: $mol_style_unit<any>, mid: $mol_style_unit<any>, max: $mol_style_unit<any>): $mol_style_func<"clamp", $mol_style_unit<any>[]>;
+        static rgba(red: number, green: number, blue: number, alpha: number): $mol_style_func<"rgba", number[]>;
+        static scale(zoom: number): $mol_style_func<"scale", number[]>;
+        static cubic_bezier(x1: number, y1: number, x2: number, y2: number): $mol_style_func<"cubic-bezier", number[]>;
+    }
+}
+
+declare namespace $ {
+    const $mol_theme: {
+        back: $mol_style_func<"var", "--mol_theme_back">;
+        hover: $mol_style_func<"var", "--mol_theme_hover">;
+        card: $mol_style_func<"var", "--mol_theme_card">;
+        current: $mol_style_func<"var", "--mol_theme_current">;
+        special: $mol_style_func<"var", "--mol_theme_special">;
+        text: $mol_style_func<"var", "--mol_theme_text">;
+        control: $mol_style_func<"var", "--mol_theme_control">;
+        shade: $mol_style_func<"var", "--mol_theme_shade">;
+        line: $mol_style_func<"var", "--mol_theme_line">;
+        focus: $mol_style_func<"var", "--mol_theme_focus">;
+        field: $mol_style_func<"var", "--mol_theme_field">;
+        image: $mol_style_func<"var", "--mol_theme_image">;
+    };
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    let $mol_gap: {
+        readonly block: $mol_style_func<"var", "--mol_gap_block">;
+        readonly text: $mol_style_func<"var", "--mol_gap_text">;
+        readonly round: $mol_style_func<"var", "--mol_gap_round">;
+        readonly space: $mol_style_func<"var", "--mol_gap_space">;
+        readonly blur: $mol_style_func<"var", "--mol_gap_blur">;
+    };
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     type $mol_view_content = $mol_view | Node | string | number | boolean;
     function $mol_view_visible_width(): number;
     function $mol_view_visible_height(): number;
@@ -572,8 +579,10 @@ declare namespace $ {
         auto(): any;
         render(): void;
         static view_classes(): (typeof $mol_view)[];
+        static _view_names?: Map<string, string[]>;
+        static view_names(suffix: string): string[];
         view_names_owned(): string[];
-        view_names(): string[];
+        view_names(): Set<string>;
         attr_static(): {
             [key: string]: string | number | boolean | null;
         };
@@ -609,153 +618,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    type $mol_type_result<Func> = Func extends (...params: any) => infer Result ? Result : Func extends new (...params: any) => infer Result ? Result : never;
-}
-
-declare namespace $ {
-    type $mol_type_error<Message, Info = {}> = Message & {
-        $mol_type_error: Info;
-    };
-}
-
-declare namespace $ {
-    type $mol_type_override<Base, Over> = Omit<Base, keyof Over> & Over;
-}
-
-declare namespace $ {
-    export type $mol_style_properties = Partial<$mol_type_override<CSSStyleDeclaration, Overrides>>;
-    type Common = 'inherit' | 'initial' | 'unset' | 'revert' | 'revert-layer';
-    type Color = 'aliceblue' | 'antiquewhite' | 'aqua' | 'aquamarine' | 'azure' | 'beige' | 'bisque' | 'black' | 'blanchedalmond' | 'blue' | 'blueviolet' | 'brown' | 'burlywood' | 'cadetblue' | 'chartreuse' | 'chocolate' | 'coral' | 'cornflowerblue' | 'cornsilk' | 'crimson' | 'cyan' | 'darkblue' | 'darkcyan' | 'darkgoldenrod' | 'darkgray' | 'darkgreen' | 'darkgrey' | 'darkkhaki' | 'darkmagenta' | 'darkolivegreen' | 'darkorange' | 'darkorchid' | 'darkred' | 'darksalmon' | 'darkseagreen' | 'darkslateblue' | 'darkslategrey' | 'darkturquoise' | 'darkviolet' | 'deeppink' | 'deepskyblue' | 'dimgray' | 'dimgrey' | 'dodgerblue' | 'firebrick' | 'floralwhite' | 'forestgreen' | 'fuchsia' | 'gainsboro' | 'ghostwhite' | 'gold' | 'goldenrod' | 'gray' | 'green' | 'greenyellow' | 'grey' | 'honeydew' | 'hotpink' | 'indianred' | 'indigo' | 'ivory' | 'khaki' | 'lavender' | 'lavenderblush' | 'lawngreen' | 'lemonchiffon' | 'lightblue' | 'lightcoral' | 'lightcyan' | 'lightgoldenrodyellow' | 'lightgray' | 'lightgreen' | 'lightgrey' | 'lightpink' | 'lightsalmon' | 'lightseagreen' | 'lightskyblue' | 'lightslategray' | 'lightslategrey' | 'lightsteelblue' | 'lightyellow' | 'lime' | 'limegreen' | 'linen' | 'magenta' | 'maroon' | 'mediumaquamarine' | 'mediumblue' | 'mediumorchid' | 'mediumpurple' | 'mediumseagreen' | 'mediumslateblue' | 'mediumspringgreen' | 'mediumturquoise' | 'mediumvioletred' | 'midnightblue' | 'mintcream' | 'mistyrose' | 'moccasin' | 'navajowhite' | 'navy' | 'oldlace' | 'olive' | 'olivedrab' | 'orange' | 'orangered' | 'orchid' | 'palegoldenrod' | 'palegreen' | 'paleturquoise' | 'palevioletred' | 'papayawhip' | 'peachpuff' | 'peru' | 'pink' | 'plum' | 'powderblue' | 'purple' | 'rebeccapurple' | 'red' | 'rosybrown' | 'royalblue' | 'saddlebrown' | 'salmon' | 'sandybrown' | 'seagreen' | 'seashell' | 'sienna' | 'silver' | 'skyblue' | 'slateblue' | 'slategray' | 'slategrey' | 'snow' | 'springgreen' | 'steelblue' | 'tan' | 'teal' | 'thistle' | 'tomato' | 'turquoise' | 'violet' | 'wheat' | 'white' | 'whitesmoke' | 'yellow' | 'yellowgreen' | 'transparent' | 'currentcolor' | $mol_style_func<'hsla' | 'rgba' | 'var'> | `#${string}`;
-    type Length = 0 | $mol_style_unit<$mol_style_unit_length> | $mol_style_func<'calc' | 'var' | 'clamp'>;
-    type Size = 'auto' | 'max-content' | 'min-content' | 'fit-content' | Length | Common;
-    type Directions<Value> = Value | readonly [Value, Value] | {
-        top?: Value;
-        right?: Value;
-        bottom?: Value;
-        left?: Value;
-    };
-    type Span_align = 'none' | 'start' | 'end' | 'center';
-    type Snap_axis = 'x' | 'y' | 'block' | 'inline' | 'both';
-    type Overflow = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto' | 'overlay' | Common;
-    type ContainRule = 'size' | 'layout' | 'style' | 'paint';
-    type Repeat = 'repeat-x' | 'repeat-y' | 'repeat' | 'space' | 'round' | 'no-repeat';
-    type BG_size = Length | 'auto' | 'contain' | 'cover';
-    interface Overrides {
-        alignContent?: 'baseline' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'normal' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | readonly ['first' | 'last', 'baseline'] | readonly ['safe' | 'unsafe', 'start' | 'end' | 'flex-start' | 'flex-end'] | Common;
-        justifyContent?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'left' | 'right' | 'space-between' | 'space-around' | 'space-evenly' | 'normal' | 'stretch' | 'center' | Common;
-        gap?: Length;
-        background?: 'none' | {
-            color?: Color | Common;
-            image?: readonly (readonly [$mol_style_func<'url'> | string & {}])[] | 'none' | Common;
-            repeat?: Repeat | [Repeat, Repeat] | Common;
-            position?: 'left' | 'right' | 'top' | 'bottom' | 'center';
-            size?: (BG_size | [BG_size, BG_size])[];
-        };
-        backdropFilter: string;
-        box?: {
-            shadow?: readonly {
-                inset?: boolean;
-                x: Length;
-                y: Length;
-                blur: Length;
-                spread: Length;
-                color: Color;
-            }[] | 'none' | Common;
-        };
-        font?: {
-            style?: 'normal' | 'italic' | Common;
-            weight?: 'normal' | 'bold' | 'lighter' | 'bolder' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Common;
-            size?: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large' | 'smaller' | 'larger' | Length | Common;
-            family?: 'serif' | 'sans-serif' | 'monospace' | 'cursive' | 'fantasy' | 'system-ui' | 'ui-serif' | 'ui-sans-serif' | 'ui-monospace' | 'ui-rounded' | 'emoji' | 'math' | 'fangsong' | Common;
-        };
-        color?: Color | Common;
-        display?: 'block' | 'inline' | 'run-in' | 'list-item' | 'none' | 'flow' | 'flow-root' | 'table' | 'flex' | 'grid' | 'contents' | 'table-row-group' | 'table-header-group' | 'table-footer-group' | 'table-column-group' | 'table-row' | 'table-cell' | 'table-column' | 'table-caption' | 'inline-block' | 'inline-table' | 'inline-flex' | 'inline-grid' | 'ruby' | 'ruby-base' | 'ruby-text' | 'ruby-base-container' | 'ruby-text-container' | Common;
-        overflow?: Overflow | {
-            x?: Overflow | Common;
-            y?: Overflow | Common;
-            anchor?: 'auto' | 'none' | Common;
-        };
-        contain?: 'none' | 'strict' | 'content' | ContainRule | readonly ContainRule[] | Common;
-        whiteSpace?: 'normal' | 'nowrap' | 'break-spaces' | 'pre' | 'pre-wrap' | 'pre-line' | Common;
-        webkitOverflowScrolling?: 'auto' | 'touch';
-        scrollbar?: {
-            color?: readonly [Color, Color] | 'auto' | Common;
-            width?: 'auto' | 'thin' | 'none' | Common;
-        };
-        scroll?: {
-            snap?: {
-                type: 'none' | Snap_axis | readonly [Snap_axis, 'mandatory' | 'proximity'] | Common;
-                stop: 'normal' | 'always' | Common;
-                align: Span_align | readonly [Span_align, Span_align] | Common;
-            };
-            padding?: Directions<Length | 'auto'>;
-        };
-        width?: Size;
-        minWidth?: Size;
-        maxWidth?: Size;
-        height?: Size;
-        minHeight?: Size;
-        maxHeight?: Size;
-        margin?: Directions<Length | 'auto'>;
-        padding?: Directions<Length | 'auto'>;
-        position?: 'static' | 'relative' | 'absolute' | 'sticky' | 'fixed';
-        top?: Length | 'auto' | Common;
-        right?: Length | 'auto' | Common;
-        bottom?: Length | 'auto' | Common;
-        left?: Length | 'auto' | Common;
-        border?: {
-            radius?: Length | [Length, Length];
-            style?: 'none' | 'hidden' | 'dotted' | 'dashed' | 'solid' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | Common;
-            color?: Directions<Color> | Common;
-            width?: Directions<Length> | Common;
-        };
-        flex?: 'none' | 'auto' | {
-            grow?: number | Common;
-            shrink?: number | Common;
-            basis?: Size;
-            direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
-            wrap?: 'wrap' | 'nowrap' | 'wrap-reverse' | Common;
-        };
-        zIndex: number;
-        opacity: number;
-    }
-    export {};
-}
-
-declare namespace $ {
-    type $mol_style_pseudo_class = ':active' | ':any' | ':any-link' | ':checked' | ':default' | ':defined' | ':dir(rtl)' | ':dir(ltr)' | ':disabled' | ':empty' | ':enabled' | ':first' | ':first-child' | ':first-of-type' | ':fullscreen' | ':focus' | ':focus-visible' | ':focus-within' | ':hover' | ':indeterminate' | ':in-range' | ':invalid' | ':last-child' | ':last-of-type' | ':left' | ':link' | ':not()' | ':nth-child(even)' | ':nth-child(odd)' | ':nth-last-child(even)' | ':nth-last-child(odd)' | ':nth-of-type(even)' | ':nth-of-type(odd)' | ':nth-last-of-type(even)' | ':nth-last-of-type(odd)' | ':only-child' | ':only-of-type' | ':optional' | ':out-of-range' | ':placeholder-shown' | ':read-only' | ':read-write' | ':required' | ':right' | ':root' | ':scope' | ':target' | ':valid' | ':visited';
-}
-
-declare namespace $ {
-    type $mol_style_pseudo_element = '::after' | '::before' | '::cue' | '::first-letter' | '::first-line' | '::selection' | '::slotted' | '::backdrop' | '::placeholder' | '::marker' | '::spelling-error' | '::grammar-error' | '::-webkit-calendar-picker-indicator' | '::-webkit-color-swatch' | '::-webkit-color-swatch-wrapper' | '::-webkit-details-marker' | '::-webkit-file-upload-button' | '::-webkit-image-inner-element' | '::-webkit-inner-spin-button' | '::-webkit-input-placeholder' | '::-webkit-input-speech-button' | '::-webkit-keygen-select' | '::-webkit-media-controls-panel' | '::-webkit-media-controls-timeline-container' | '::-webkit-media-slider-container' | '::-webkit-meter-bar' | '::-webkit-meter-even-less-good-value' | '::-webkit-meter-optimum-value' | '::-webkit-meter-suboptimal-value' | '::-webkit-progress-bar' | '::-webkit-progress-value' | '::-webkit-resizer' | '::-webkit-resizer:window-inactive' | '::-webkit-scrollbar' | '::-webkit-scrollbar-button' | '::-webkit-scrollbar-button:disabled' | '::-webkit-scrollbar-button:double-button:horizontal:end:decrement' | '::-webkit-scrollbar-button:double-button:horizontal:end:increment' | '::-webkit-scrollbar-button:double-button:horizontal:end:increment:corner-present' | '::-webkit-scrollbar-button:double-button:horizontal:start:decrement' | '::-webkit-scrollbar-button:double-button:horizontal:start:increment' | '::-webkit-scrollbar-button:double-button:vertical:end:decrement' | '::-webkit-scrollbar-button:double-button:vertical:end:increment' | '::-webkit-scrollbar-button:double-button:vertical:end:increment:corner-present' | '::-webkit-scrollbar-button:double-button:vertical:start:decrement' | '::-webkit-scrollbar-button:double-button:vertical:start:increment' | '::-webkit-scrollbar-button:end' | '::-webkit-scrollbar-button:end:decrement' | '::-webkit-scrollbar-button:end:increment' | '::-webkit-scrollbar-button:horizontal' | '::-webkit-scrollbar-button:horizontal:decrement' | '::-webkit-scrollbar-button:horizontal:decrement:active' | '::-webkit-scrollbar-button:horizontal:decrement:hover' | '::-webkit-scrollbar-button:horizontal:decrement:window-inactive' | '::-webkit-scrollbar-button:horizontal:end' | '::-webkit-scrollbar-button:horizontal:end:decrement' | '::-webkit-scrollbar-button:horizontal:end:increment' | '::-webkit-scrollbar-button:horizontal:end:increment:corner-present' | '::-webkit-scrollbar-button:horizontal:increment' | '::-webkit-scrollbar-button:horizontal:increment:active' | '::-webkit-scrollbar-button:horizontal:increment:hover' | '::-webkit-scrollbar-button:horizontal:increment:window-inactive' | '::-webkit-scrollbar-button:horizontal:start' | '::-webkit-scrollbar-button:horizontal:start:decrement' | '::-webkit-scrollbar-button:horizontal:start:increment' | '::-webkit-scrollbar-button:start' | '::-webkit-scrollbar-button:start:decrement' | '::-webkit-scrollbar-button:start:increment' | '::-webkit-scrollbar-button:vertical' | '::-webkit-scrollbar-button:vertical:decrement' | '::-webkit-scrollbar-button:vertical:decrement:active' | '::-webkit-scrollbar-button:vertical:decrement:hover' | '::-webkit-scrollbar-button:vertical:decrement:window-inactive' | '::-webkit-scrollbar-button:vertical:end' | '::-webkit-scrollbar-button:vertical:end:decrement' | '::-webkit-scrollbar-button:vertical:end:increment' | '::-webkit-scrollbar-button:vertical:end:increment:corner-present' | '::-webkit-scrollbar-button:vertical:increment' | '::-webkit-scrollbar-button:vertical:increment:active' | '::-webkit-scrollbar-button:vertical:increment:hover' | '::-webkit-scrollbar-button:vertical:increment:window-inactive' | '::-webkit-scrollbar-button:vertical:start' | '::-webkit-scrollbar-button:vertical:start:decrement' | '::-webkit-scrollbar-button:vertical:start:increment' | '::-webkit-scrollbar-corner' | '::-webkit-scrollbar-corner:window-inactive' | '::-webkit-scrollbar-thumb' | '::-webkit-scrollbar-thumb:horizontal' | '::-webkit-scrollbar-thumb:horizontal:active' | '::-webkit-scrollbar-thumb:horizontal:hover' | '::-webkit-scrollbar-thumb:horizontal:window-inactive' | '::-webkit-scrollbar-thumb:vertical' | '::-webkit-scrollbar-thumb:vertical:active' | '::-webkit-scrollbar-thumb:vertical:hover' | '::-webkit-scrollbar-thumb:vertical:window-inactive' | '::-webkit-scrollbar-track' | '::-webkit-scrollbar-track-piece' | '::-webkit-scrollbar-track-piece:disabled' | '::-webkit-scrollbar-track-piece:end' | '::-webkit-scrollbar-track-piece:horizontal:decrement' | '::-webkit-scrollbar-track-piece:horizontal:decrement:active' | '::-webkit-scrollbar-track-piece:horizontal:decrement:hover' | '::-webkit-scrollbar-track-piece:horizontal:end' | '::-webkit-scrollbar-track-piece:horizontal:end:corner-present' | '::-webkit-scrollbar-track-piece:horizontal:end:double-button' | '::-webkit-scrollbar-track-piece:horizontal:end:no-button' | '::-webkit-scrollbar-track-piece:horizontal:end:no-button:corner-present' | '::-webkit-scrollbar-track-piece:horizontal:end:single-button' | '::-webkit-scrollbar-track-piece:horizontal:increment' | '::-webkit-scrollbar-track-piece:horizontal:increment:active' | '::-webkit-scrollbar-track-piece:horizontal:increment:hover' | '::-webkit-scrollbar-track-piece:horizontal:start' | '::-webkit-scrollbar-track-piece:horizontal:start:double-button' | '::-webkit-scrollbar-track-piece:horizontal:start:no-button' | '::-webkit-scrollbar-track-piece:horizontal:start:single-button' | '::-webkit-scrollbar-track-piece:start' | '::-webkit-scrollbar-track-piece:vertical:decrement' | '::-webkit-scrollbar-track-piece:vertical:decrement:active' | '::-webkit-scrollbar-track-piece:vertical:decrement:hover' | '::-webkit-scrollbar-track-piece:vertical:end' | '::-webkit-scrollbar-track-piece:vertical:end:corner-present' | '::-webkit-scrollbar-track-piece:vertical:end:double-button' | '::-webkit-scrollbar-track-piece:vertical:end:no-button' | '::-webkit-scrollbar-track-piece:vertical:end:no-button:corner-present' | '::-webkit-scrollbar-track-piece:vertical:end:single-button' | '::-webkit-scrollbar-track-piece:vertical:increment' | '::-webkit-scrollbar-track-piece:vertical:increment:active' | '::-webkit-scrollbar-track-piece:vertical:increment:hover' | '::-webkit-scrollbar-track-piece:vertical:start' | '::-webkit-scrollbar-track-piece:vertical:start:double-button' | '::-webkit-scrollbar-track-piece:vertical:start:no-button' | '::-webkit-scrollbar-track-piece:vertical:start:single-button' | '::-webkit-scrollbar-track:disabled' | '::-webkit-scrollbar-track:horizontal' | '::-webkit-scrollbar-track:horizontal:disabled' | '::-webkit-scrollbar-track:horizontal:disabled:corner-present' | '::-webkit-scrollbar-track:vertical:disabled' | '::-webkit-scrollbar-track:vertical:disabled:corner-present' | '::-webkit-scrollbar:horizontal' | '::-webkit-scrollbar:horizontal:corner-present' | '::-webkit-scrollbar:horizontal:window-inactive' | '::-webkit-scrollbar:vertical' | '::-webkit-scrollbar:vertical:corner-present' | '::-webkit-scrollbar:vertical:window-inactive' | '::-webkit-search-cancel-button' | '::-webkit-search-decoration' | '::-webkit-search-results-button' | '::-webkit-search-results-decoration' | '::-webkit-slider-container' | '::-webkit-slider-runnable-track' | '::-webkit-slider-thumb' | '::-webkit-slider-thumb:disabled' | '::-webkit-slider-thumb:hover' | '::-webkit-textfield-decoration-container' | '::-webkit-validation-bubble' | '::-webkit-validation-bubble-arrow' | '::-webkit-validation-bubble-arrow-clipper' | '::-webkit-validation-bubble-heading' | '::-webkit-validation-bubble-message' | '::-webkit-validation-bubble-text-block';
-}
-
-declare namespace $ {
-    type Descendant<Name extends keyof $mol_view_all, Config> = $mol_style_guard<Extract<$mol_type_result<$mol_view_all[Name]>, $mol_view>, Config>;
-    type Kids<Config> = {
-        [view in keyof Config]: view extends keyof $mol_view_all ? Descendant<view, Config[view]> : $mol_type_error<'Unknown View'>;
-    };
-    type Attrs<View extends $mol_view, Config> = {
-        [name in keyof Config]: name extends keyof ReturnType<View['attr']> ? {
-            [val in keyof Config[name]]: $mol_style_guard<View, Config[name][val]>;
-        } : $mol_type_error<'Unknown attribute'>;
-    };
-    type Medias<View extends $mol_view, Config> = {
-        [query in keyof Config]: $mol_style_guard<View, Config[query]>;
-    };
-    export type $mol_style_guard<View extends $mol_view, Config> = $mol_style_properties & {
-        [key in keyof Config]: key extends keyof $mol_style_properties ? unknown : key extends $mol_style_pseudo_class | $mol_style_pseudo_element ? $mol_style_guard<View, Config[key]> : key extends '>' ? Kids<Config[key]> : key extends '@' ? Attrs<View, Config[key]> : key extends '@media' ? Medias<View, Config[key]> : key extends keyof $mol_view_all ? Descendant<key, Config[key]> : key extends keyof View ? View[key] extends (id?: any) => infer Sub ? Sub extends $mol_view ? $mol_style_guard<Sub, Config[key]> : $mol_type_error<'Property returns non $mol_view', {
-            Returns: Sub;
-        }> : $mol_type_error<'Field is not a Property'> : $mol_type_error<'Unknown Property or View'>;
-    };
-    export {};
-}
-
-declare namespace $ {
-    function $mol_style_sheet<Component extends $mol_view, Config extends $mol_style_guard<Component, Config>>(Component: new () => Component, config0: Config): string;
-}
-
-declare namespace $ {
     class $mol_plugin extends $mol_view {
         dom_node(next?: Element): Element;
         attr_static(): {
@@ -769,19 +631,11 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_style_define<Component extends $mol_view, Config extends $mol_style_guard<Component, Config>>(Component: new () => Component, config: Config): HTMLStyleElement | null;
-}
-
-declare namespace $ {
     class $mol_scroll extends $mol_view {
         scroll_top(val?: any): number;
         scroll_left(val?: any): number;
-        field(): {
-            tabIndex: number;
-        };
-        event(): {
-            scroll: (event?: any) => any;
-        };
+        field(): Record<string, any>;
+        event(): Record<string, any>;
         tabindex(): number;
         event_scroll(event?: any): any;
     }
@@ -810,7 +664,151 @@ declare namespace $ {
     }
 }
 
-declare namespace $.$$ {
+declare namespace $ {
+    type $mol_type_override<Base, Over> = Omit<Base, keyof Over> & Over;
+}
+
+declare namespace $ {
+    export type $mol_style_properties = Partial<$mol_type_override<CSSStyleDeclaration, Overrides>>;
+    type Common = 'inherit' | 'initial' | 'unset' | 'revert' | 'revert-layer' | $mol_style_func<'var'>;
+    type Color = 'aliceblue' | 'antiquewhite' | 'aqua' | 'aquamarine' | 'azure' | 'beige' | 'bisque' | 'black' | 'blanchedalmond' | 'blue' | 'blueviolet' | 'brown' | 'burlywood' | 'cadetblue' | 'chartreuse' | 'chocolate' | 'coral' | 'cornflowerblue' | 'cornsilk' | 'crimson' | 'cyan' | 'darkblue' | 'darkcyan' | 'darkgoldenrod' | 'darkgray' | 'darkgreen' | 'darkgrey' | 'darkkhaki' | 'darkmagenta' | 'darkolivegreen' | 'darkorange' | 'darkorchid' | 'darkred' | 'darksalmon' | 'darkseagreen' | 'darkslateblue' | 'darkslategrey' | 'darkturquoise' | 'darkviolet' | 'deeppink' | 'deepskyblue' | 'dimgray' | 'dimgrey' | 'dodgerblue' | 'firebrick' | 'floralwhite' | 'forestgreen' | 'fuchsia' | 'gainsboro' | 'ghostwhite' | 'gold' | 'goldenrod' | 'gray' | 'green' | 'greenyellow' | 'grey' | 'honeydew' | 'hotpink' | 'indianred' | 'indigo' | 'ivory' | 'khaki' | 'lavender' | 'lavenderblush' | 'lawngreen' | 'lemonchiffon' | 'lightblue' | 'lightcoral' | 'lightcyan' | 'lightgoldenrodyellow' | 'lightgray' | 'lightgreen' | 'lightgrey' | 'lightpink' | 'lightsalmon' | 'lightseagreen' | 'lightskyblue' | 'lightslategray' | 'lightslategrey' | 'lightsteelblue' | 'lightyellow' | 'lime' | 'limegreen' | 'linen' | 'magenta' | 'maroon' | 'mediumaquamarine' | 'mediumblue' | 'mediumorchid' | 'mediumpurple' | 'mediumseagreen' | 'mediumslateblue' | 'mediumspringgreen' | 'mediumturquoise' | 'mediumvioletred' | 'midnightblue' | 'mintcream' | 'mistyrose' | 'moccasin' | 'navajowhite' | 'navy' | 'oldlace' | 'olive' | 'olivedrab' | 'orange' | 'orangered' | 'orchid' | 'palegoldenrod' | 'palegreen' | 'paleturquoise' | 'palevioletred' | 'papayawhip' | 'peachpuff' | 'peru' | 'pink' | 'plum' | 'powderblue' | 'purple' | 'rebeccapurple' | 'red' | 'rosybrown' | 'royalblue' | 'saddlebrown' | 'salmon' | 'sandybrown' | 'seagreen' | 'seashell' | 'sienna' | 'silver' | 'skyblue' | 'slateblue' | 'slategray' | 'slategrey' | 'snow' | 'springgreen' | 'steelblue' | 'tan' | 'teal' | 'thistle' | 'tomato' | 'turquoise' | 'violet' | 'wheat' | 'white' | 'whitesmoke' | 'yellow' | 'yellowgreen' | 'transparent' | 'currentcolor' | $mol_style_func<'hsla' | 'rgba' | 'var'> | `#${string}`;
+    type Length = 0 | `${number}${$mol_style_unit_length}` | $mol_style_func<'calc' | 'var' | 'clamp'>;
+    type Size = 'auto' | 'max-content' | 'min-content' | 'fit-content' | Length | Common;
+    type Directions<Value> = Value | readonly [Value, Value] | {
+        top?: Value;
+        right?: Value;
+        bottom?: Value;
+        left?: Value;
+    };
+    type Span_align = 'none' | 'start' | 'end' | 'center' | $mol_style_func<'var'>;
+    type Snap_axis = 'x' | 'y' | 'block' | 'inline' | 'both' | $mol_style_func<'var'>;
+    type Overflow = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto' | 'overlay' | Common;
+    type ContainRule = 'size' | 'layout' | 'style' | 'paint' | $mol_style_func<'var'>;
+    type Repeat = 'repeat-x' | 'repeat-y' | 'repeat' | 'space' | 'round' | 'no-repeat' | $mol_style_func<'var'>;
+    type BG_size = Length | 'auto' | 'contain' | 'cover';
+    interface Overrides {
+        alignContent?: 'baseline' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'normal' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | readonly ['first' | 'last', 'baseline'] | readonly ['safe' | 'unsafe', 'start' | 'end' | 'flex-start' | 'flex-end'] | Common;
+        justifyContent?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'left' | 'right' | 'space-between' | 'space-around' | 'space-evenly' | 'normal' | 'stretch' | 'center' | Common;
+        gap?: Length;
+        background?: 'none' | {
+            color?: Color | Common;
+            image?: readonly (readonly [$mol_style_func<'url'> | string & {}])[] | 'none' | Common;
+            repeat?: Repeat | [Repeat, Repeat] | Common;
+            position?: 'left' | 'right' | 'top' | 'bottom' | 'center' | Common;
+            size?: (BG_size | [BG_size, BG_size])[];
+        };
+        backdropFilter: string | Common;
+        box?: {
+            shadow?: readonly {
+                inset?: boolean;
+                x: Length;
+                y: Length;
+                blur: Length;
+                spread: Length;
+                color: Color;
+            }[] | 'none' | Common;
+        };
+        font?: {
+            style?: 'normal' | 'italic' | Common;
+            weight?: 'normal' | 'bold' | 'lighter' | 'bolder' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Common;
+            size?: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large' | 'smaller' | 'larger' | Length | Common;
+            family?: 'serif' | 'sans-serif' | 'monospace' | 'cursive' | 'fantasy' | 'system-ui' | 'ui-serif' | 'ui-sans-serif' | 'ui-monospace' | 'ui-rounded' | 'emoji' | 'math' | 'fangsong' | Common;
+        };
+        color?: Color | Common;
+        display?: 'block' | 'inline' | 'run-in' | 'list-item' | 'none' | 'flow' | 'flow-root' | 'table' | 'flex' | 'grid' | 'contents' | 'table-row-group' | 'table-header-group' | 'table-footer-group' | 'table-column-group' | 'table-row' | 'table-cell' | 'table-column' | 'table-caption' | 'inline-block' | 'inline-table' | 'inline-flex' | 'inline-grid' | 'ruby' | 'ruby-base' | 'ruby-text' | 'ruby-base-container' | 'ruby-text-container' | Common;
+        overflow?: Overflow | {
+            x?: Overflow | Common;
+            y?: Overflow | Common;
+            anchor?: 'auto' | 'none' | Common;
+        };
+        contain?: 'none' | 'strict' | 'content' | ContainRule | readonly ContainRule[] | Common;
+        whiteSpace?: 'normal' | 'nowrap' | 'break-spaces' | 'pre' | 'pre-wrap' | 'pre-line' | Common;
+        webkitOverflowScrolling?: 'auto' | 'touch' | Common;
+        scrollbar?: {
+            color?: readonly [Color, Color] | 'auto' | Common;
+            width?: 'auto' | 'thin' | 'none' | Common;
+        };
+        scroll?: {
+            snap?: {
+                type: 'none' | Snap_axis | readonly [Snap_axis, 'mandatory' | 'proximity'] | Common;
+                stop: 'normal' | 'always' | Common;
+                align: Span_align | readonly [Span_align, Span_align] | Common;
+            };
+            padding?: Directions<Length | 'auto'>;
+        };
+        width?: Size;
+        minWidth?: Size;
+        maxWidth?: Size;
+        height?: Size;
+        minHeight?: Size;
+        maxHeight?: Size;
+        margin?: Directions<Length | 'auto'>;
+        padding?: Directions<Length | 'auto'>;
+        position?: 'static' | 'relative' | 'absolute' | 'sticky' | 'fixed' | Common;
+        top?: Length | 'auto' | Common;
+        right?: Length | 'auto' | Common;
+        bottom?: Length | 'auto' | Common;
+        left?: Length | 'auto' | Common;
+        border?: Directions<{
+            radius?: Length | [Length, Length];
+            style?: 'none' | 'hidden' | 'dotted' | 'dashed' | 'solid' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | Common;
+            color?: Color | Common;
+            width?: Length | Common;
+        }>;
+        flex?: 'none' | 'auto' | {
+            grow?: number | Common;
+            shrink?: number | Common;
+            basis?: Size | Common;
+            direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse' | Common;
+            wrap?: 'wrap' | 'nowrap' | 'wrap-reverse' | Common;
+        };
+        zIndex: number | Common;
+        opacity: number | Common;
+        aspectRatio: number | Common;
+    }
+    export {};
+}
+
+declare namespace $ {
+    type $mol_style_pseudo_class = ':active' | ':any' | ':any-link' | ':checked' | ':default' | ':defined' | ':dir(rtl)' | ':dir(ltr)' | ':disabled' | ':empty' | ':enabled' | ':first' | ':first-child' | ':first-of-type' | ':fullscreen' | ':focus' | ':focus-visible' | ':focus-within' | ':hover' | ':indeterminate' | ':in-range' | ':invalid' | ':last-child' | ':last-of-type' | ':left' | ':link' | ':not()' | ':nth-child(even)' | ':nth-child(odd)' | ':nth-last-child(even)' | ':nth-last-child(odd)' | ':nth-of-type(even)' | ':nth-of-type(odd)' | ':nth-last-of-type(even)' | ':nth-last-of-type(odd)' | ':only-child' | ':only-of-type' | ':optional' | ':out-of-range' | ':placeholder-shown' | ':read-only' | ':read-write' | ':required' | ':right' | ':root' | ':scope' | ':target' | ':valid' | ':visited';
+}
+
+declare namespace $ {
+    type $mol_style_pseudo_element = '::after' | '::before' | '::cue' | '::first-letter' | '::first-line' | '::selection' | '::slotted' | '::backdrop' | '::placeholder' | '::marker' | '::spelling-error' | '::grammar-error' | '::-webkit-calendar-picker-indicator' | '::-webkit-color-swatch' | '::-webkit-color-swatch-wrapper' | '::-webkit-details-marker' | '::-webkit-file-upload-button' | '::-webkit-image-inner-element' | '::-webkit-inner-spin-button' | '::-webkit-input-placeholder' | '::-webkit-input-speech-button' | '::-webkit-keygen-select' | '::-webkit-media-controls-panel' | '::-webkit-media-controls-timeline-container' | '::-webkit-media-slider-container' | '::-webkit-meter-bar' | '::-webkit-meter-even-less-good-value' | '::-webkit-meter-optimum-value' | '::-webkit-meter-suboptimal-value' | '::-webkit-progress-bar' | '::-webkit-progress-value' | '::-webkit-resizer' | '::-webkit-resizer:window-inactive' | '::-webkit-scrollbar' | '::-webkit-scrollbar-button' | '::-webkit-scrollbar-button:disabled' | '::-webkit-scrollbar-button:double-button:horizontal:end:decrement' | '::-webkit-scrollbar-button:double-button:horizontal:end:increment' | '::-webkit-scrollbar-button:double-button:horizontal:end:increment:corner-present' | '::-webkit-scrollbar-button:double-button:horizontal:start:decrement' | '::-webkit-scrollbar-button:double-button:horizontal:start:increment' | '::-webkit-scrollbar-button:double-button:vertical:end:decrement' | '::-webkit-scrollbar-button:double-button:vertical:end:increment' | '::-webkit-scrollbar-button:double-button:vertical:end:increment:corner-present' | '::-webkit-scrollbar-button:double-button:vertical:start:decrement' | '::-webkit-scrollbar-button:double-button:vertical:start:increment' | '::-webkit-scrollbar-button:end' | '::-webkit-scrollbar-button:end:decrement' | '::-webkit-scrollbar-button:end:increment' | '::-webkit-scrollbar-button:horizontal' | '::-webkit-scrollbar-button:horizontal:decrement' | '::-webkit-scrollbar-button:horizontal:decrement:active' | '::-webkit-scrollbar-button:horizontal:decrement:hover' | '::-webkit-scrollbar-button:horizontal:decrement:window-inactive' | '::-webkit-scrollbar-button:horizontal:end' | '::-webkit-scrollbar-button:horizontal:end:decrement' | '::-webkit-scrollbar-button:horizontal:end:increment' | '::-webkit-scrollbar-button:horizontal:end:increment:corner-present' | '::-webkit-scrollbar-button:horizontal:increment' | '::-webkit-scrollbar-button:horizontal:increment:active' | '::-webkit-scrollbar-button:horizontal:increment:hover' | '::-webkit-scrollbar-button:horizontal:increment:window-inactive' | '::-webkit-scrollbar-button:horizontal:start' | '::-webkit-scrollbar-button:horizontal:start:decrement' | '::-webkit-scrollbar-button:horizontal:start:increment' | '::-webkit-scrollbar-button:start' | '::-webkit-scrollbar-button:start:decrement' | '::-webkit-scrollbar-button:start:increment' | '::-webkit-scrollbar-button:vertical' | '::-webkit-scrollbar-button:vertical:decrement' | '::-webkit-scrollbar-button:vertical:decrement:active' | '::-webkit-scrollbar-button:vertical:decrement:hover' | '::-webkit-scrollbar-button:vertical:decrement:window-inactive' | '::-webkit-scrollbar-button:vertical:end' | '::-webkit-scrollbar-button:vertical:end:decrement' | '::-webkit-scrollbar-button:vertical:end:increment' | '::-webkit-scrollbar-button:vertical:end:increment:corner-present' | '::-webkit-scrollbar-button:vertical:increment' | '::-webkit-scrollbar-button:vertical:increment:active' | '::-webkit-scrollbar-button:vertical:increment:hover' | '::-webkit-scrollbar-button:vertical:increment:window-inactive' | '::-webkit-scrollbar-button:vertical:start' | '::-webkit-scrollbar-button:vertical:start:decrement' | '::-webkit-scrollbar-button:vertical:start:increment' | '::-webkit-scrollbar-corner' | '::-webkit-scrollbar-corner:window-inactive' | '::-webkit-scrollbar-thumb' | '::-webkit-scrollbar-thumb:horizontal' | '::-webkit-scrollbar-thumb:horizontal:active' | '::-webkit-scrollbar-thumb:horizontal:hover' | '::-webkit-scrollbar-thumb:horizontal:window-inactive' | '::-webkit-scrollbar-thumb:vertical' | '::-webkit-scrollbar-thumb:vertical:active' | '::-webkit-scrollbar-thumb:vertical:hover' | '::-webkit-scrollbar-thumb:vertical:window-inactive' | '::-webkit-scrollbar-track' | '::-webkit-scrollbar-track-piece' | '::-webkit-scrollbar-track-piece:disabled' | '::-webkit-scrollbar-track-piece:end' | '::-webkit-scrollbar-track-piece:horizontal:decrement' | '::-webkit-scrollbar-track-piece:horizontal:decrement:active' | '::-webkit-scrollbar-track-piece:horizontal:decrement:hover' | '::-webkit-scrollbar-track-piece:horizontal:end' | '::-webkit-scrollbar-track-piece:horizontal:end:corner-present' | '::-webkit-scrollbar-track-piece:horizontal:end:double-button' | '::-webkit-scrollbar-track-piece:horizontal:end:no-button' | '::-webkit-scrollbar-track-piece:horizontal:end:no-button:corner-present' | '::-webkit-scrollbar-track-piece:horizontal:end:single-button' | '::-webkit-scrollbar-track-piece:horizontal:increment' | '::-webkit-scrollbar-track-piece:horizontal:increment:active' | '::-webkit-scrollbar-track-piece:horizontal:increment:hover' | '::-webkit-scrollbar-track-piece:horizontal:start' | '::-webkit-scrollbar-track-piece:horizontal:start:double-button' | '::-webkit-scrollbar-track-piece:horizontal:start:no-button' | '::-webkit-scrollbar-track-piece:horizontal:start:single-button' | '::-webkit-scrollbar-track-piece:start' | '::-webkit-scrollbar-track-piece:vertical:decrement' | '::-webkit-scrollbar-track-piece:vertical:decrement:active' | '::-webkit-scrollbar-track-piece:vertical:decrement:hover' | '::-webkit-scrollbar-track-piece:vertical:end' | '::-webkit-scrollbar-track-piece:vertical:end:corner-present' | '::-webkit-scrollbar-track-piece:vertical:end:double-button' | '::-webkit-scrollbar-track-piece:vertical:end:no-button' | '::-webkit-scrollbar-track-piece:vertical:end:no-button:corner-present' | '::-webkit-scrollbar-track-piece:vertical:end:single-button' | '::-webkit-scrollbar-track-piece:vertical:increment' | '::-webkit-scrollbar-track-piece:vertical:increment:active' | '::-webkit-scrollbar-track-piece:vertical:increment:hover' | '::-webkit-scrollbar-track-piece:vertical:start' | '::-webkit-scrollbar-track-piece:vertical:start:double-button' | '::-webkit-scrollbar-track-piece:vertical:start:no-button' | '::-webkit-scrollbar-track-piece:vertical:start:single-button' | '::-webkit-scrollbar-track:disabled' | '::-webkit-scrollbar-track:horizontal' | '::-webkit-scrollbar-track:horizontal:disabled' | '::-webkit-scrollbar-track:horizontal:disabled:corner-present' | '::-webkit-scrollbar-track:vertical:disabled' | '::-webkit-scrollbar-track:vertical:disabled:corner-present' | '::-webkit-scrollbar:horizontal' | '::-webkit-scrollbar:horizontal:corner-present' | '::-webkit-scrollbar:horizontal:window-inactive' | '::-webkit-scrollbar:vertical' | '::-webkit-scrollbar:vertical:corner-present' | '::-webkit-scrollbar:vertical:window-inactive' | '::-webkit-search-cancel-button' | '::-webkit-search-decoration' | '::-webkit-search-results-button' | '::-webkit-search-results-decoration' | '::-webkit-slider-container' | '::-webkit-slider-runnable-track' | '::-webkit-slider-thumb' | '::-webkit-slider-thumb:disabled' | '::-webkit-slider-thumb:hover' | '::-webkit-textfield-decoration-container' | '::-webkit-validation-bubble' | '::-webkit-validation-bubble-arrow' | '::-webkit-validation-bubble-arrow-clipper' | '::-webkit-validation-bubble-heading' | '::-webkit-validation-bubble-message' | '::-webkit-validation-bubble-text-block';
+}
+
+declare namespace $ {
+    type $mol_type_error<Message, Info = {}> = Message & {
+        $mol_type_error: Info;
+    };
+}
+
+declare namespace $ {
+    type Attrs<View extends $mol_view, Config, Attrs = ReturnType<View['attr']>> = {
+        [name in keyof Attrs]?: {
+            [val in keyof Config[Extract<name, keyof Config>]]: $mol_style_guard<View, Config[Extract<name, keyof Config>][val]>;
+        };
+    };
+    type Medias<View extends $mol_view, Config> = {
+        [query in keyof Config]: $mol_style_guard<View, Config[query]>;
+    };
+    type Keys<View extends $mol_view> = '>' | '@' | keyof $mol_style_properties | $mol_style_pseudo_element | $mol_style_pseudo_class | $mol_type_keys_extract<View, () => $mol_view> | `$${string}`;
+    export type $mol_style_guard<View extends $mol_view, Config> = {
+        [key in Keys<View>]?: unknown;
+    } & {
+        [key in keyof Config]: key extends keyof $mol_style_properties ? $mol_style_properties[key] : key extends '>' | $mol_style_pseudo_class | $mol_style_pseudo_element ? $mol_style_guard<View, Config[key]> : key extends '@' ? Attrs<View, Config[key]> : key extends '@media' ? Medias<View, Config[key]> : key extends `--${string}` ? any : key extends keyof $ ? $mol_style_guard<InstanceType<Extract<$[key], typeof $mol_view>>, Config[key]> : key extends keyof View ? View[key] extends (id?: any) => infer Sub ? Sub extends $mol_view ? $mol_style_guard<Sub, Config[key]> : $mol_type_error<'Property returns non $mol_view', {
+            Returns: Sub;
+        }> : $mol_type_error<'Field is not a Property'> : key extends `$${string}` ? $mol_type_error<'Unknown View Class'> : $mol_type_error<'Unknown CSS Property'>;
+    };
+    export {};
+}
+
+declare namespace $ {
+    function $mol_style_sheet<Component extends $mol_view, Config extends $mol_style_guard<Component, Config>>(Component: new () => Component, config0: Config): string;
+}
+
+declare namespace $ {
+    function $mol_style_define<Component extends $mol_view, Config extends $mol_style_guard<Component, Config>>(Component: new () => Component, config: Config): HTMLStyleElement | null;
 }
 
 declare namespace $.$$ {
@@ -823,11 +821,16 @@ declare namespace $.$$ {
     }
 }
 
+declare namespace $.$$ {
+}
+
 declare namespace $ {
     class $mol_book2 extends $mol_scroll {
+        menu_title(): string;
         sub(): readonly $mol_view[];
         minimal_width(): number;
         Placeholder(): $mol_view;
+        Gap(id: any): $mol_view;
         pages(): readonly $mol_view[];
     }
 }
@@ -836,33 +839,26 @@ declare namespace $ {
     let $mol_mem_cached: typeof $mol_wire_probe;
 }
 
-declare namespace $ {
-}
-
 declare namespace $.$$ {
     class $mol_book2 extends $.$mol_book2 {
         title(): string;
+        menu_title(): string;
         sub(): readonly $mol_view[];
         bring(): void;
     }
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_link extends $mol_view {
         uri(): string;
         dom_name(): string;
-        attr(): {
-            href: string;
-            title: string;
-            target: string;
-            download: string;
-            mol_link_current: boolean;
-        };
+        attr(): Record<string, any>;
         sub(): readonly $mol_view_content[];
-        arg(): {};
-        event(): {
-            click: (event?: any) => any;
-        };
+        arg(): Record<string, any>;
+        event(): Record<string, any>;
         uri_toggle(): string;
         hint(): string;
         hint_safe(): string;
@@ -886,16 +882,14 @@ declare namespace $ {
         static href_absolute(): string;
         static dict(next?: {
             [key: string]: string | null;
-        }): {
+        }): Readonly<{
             [key: string]: string;
-        };
+        }>;
         static dict_cut(except: string[]): {
             [key: string]: string;
         };
         static value(key: string, next?: string | null): string | null;
-        static link(next: {
-            [key: string]: string;
-        }): string;
+        static link(next: Record<string, string | null>): string;
         static prolog: string;
         static separator: string;
         static make_link(next: {
@@ -908,13 +902,8 @@ declare namespace $ {
         constructor(prefix?: string);
         value(key: string, next?: string): string | null;
         sub(postfix: string): $mol_state_arg;
-        link(next: {
-            [key: string]: string;
-        }): string;
+        link(next: Record<string, string | null>): string;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $.$$ {
@@ -933,10 +922,14 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_pop extends $mol_view {
         showed(val?: any): boolean;
         align_vert(): string;
         align_hor(): string;
+        prefer(): string;
         sub(): readonly any[];
         sub_visible(): readonly any[];
         Anchor(): any;
@@ -945,22 +938,14 @@ declare namespace $ {
         height_max(): number;
         Bubble(): $mol_pop_bubble;
     }
-    class $mol_pop_bubble extends $mol_scroll {
+    class $mol_pop_bubble extends $mol_view {
         sub(): readonly $mol_view_content[];
-        style(): {
-            maxHeight: number;
-        };
-        attr(): {
-            mol_pop_align: string;
-            tabindex: number;
-        };
+        style(): Record<string, any>;
+        attr(): Record<string, any>;
         content(): readonly $mol_view_content[];
         height_max(): number;
         align(): string;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -1002,14 +987,14 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_speck extends $mol_view {
-        attr(): {
-            mol_theme: string;
-        };
-        style(): {
-            minHeight: string;
-        };
+        attr(): Record<string, any>;
+        style(): Record<string, any>;
         sub(): readonly any[];
+        theme(): string;
         value(): any;
     }
 }
@@ -1022,17 +1007,8 @@ declare namespace $ {
         enabled(): boolean;
         click(event?: any): any;
         event_click(event?: any): any;
-        event(): {
-            click: (event?: any) => any;
-            dblclick: (event?: any) => any;
-            keydown: (event?: any) => any;
-        };
-        attr(): {
-            disabled: boolean;
-            role: string;
-            tabindex: number;
-            title: string;
-        };
+        event(): Record<string, any>;
+        attr(): Record<string, any>;
         sub(): readonly $mol_view_content[];
         Speck(): $mol_speck;
         event_activate(event?: any): any;
@@ -1151,9 +1127,6 @@ declare namespace $ {
     }
 }
 
-declare namespace $ {
-}
-
 declare namespace $.$$ {
     class $mol_button extends $.$mol_button {
         status(next?: any[]): any[];
@@ -1165,6 +1138,9 @@ declare namespace $.$$ {
         hint_safe(): string;
         sub_visible(): ($mol_view_content | $mol_speck)[];
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -1187,10 +1163,8 @@ declare namespace $ {
 
 declare namespace $ {
     class $mol_hotkey extends $mol_plugin {
-        event(): {
-            keydown: (event?: any) => any;
-        };
-        key(): {};
+        event(): Record<string, any>;
+        key(): Record<string, any>;
         mod_ctrl(): boolean;
         mod_alt(): boolean;
         mod_shift(): boolean;
@@ -1321,9 +1295,7 @@ declare namespace $ {
         event_down(event?: any): any;
         event_left(event?: any): any;
         event_right(event?: any): any;
-        event(): {
-            keydown: (event?: any) => any;
-        };
+        event(): Record<string, any>;
         event_key(event?: any): any;
     }
 }
@@ -1423,6 +1395,9 @@ declare namespace $ {
     class $mol_fetch_response extends $mol_object2 {
         readonly native: Response;
         constructor(native: Response);
+        status(): "success" | "unknown" | "inform" | "redirect" | "wrong" | "failed";
+        code(): number;
+        message(): string;
         headers(): Headers;
         mime(): string | null;
         stream(): ReadableStream<Uint8Array> | null;
@@ -1438,6 +1413,7 @@ declare namespace $ {
             destructor: () => void;
         };
         static response(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
+        static success(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
         static stream(input: RequestInfo, init?: RequestInit): ReadableStream<Uint8Array> | null;
         static text(input: RequestInfo, init?: RequestInit): string;
         static json(input: RequestInfo, init?: RequestInit): unknown;
@@ -1464,6 +1440,18 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_huggingface_run(this: $, space: string, method: string | number, ...data: readonly any[]): readonly any[];
+    function $mol_huggingface_rest(space: string, method: string, ...data: readonly any[]): readonly any[];
+    function $mol_huggingface_ws(space: string, fn_index: number, ...data: readonly any[]): Promise<readonly any[]> & {
+        destructor: () => void;
+    };
+}
+
+declare namespace $ {
+    function $hyoo_lingua_translate(this: $, lang: string, text: string): string;
+}
+
+declare namespace $ {
     interface $mol_locale_dict {
         [key: string]: string;
     }
@@ -1485,23 +1473,9 @@ declare namespace $ {
         autocomplete(): boolean;
         selection(val?: any): readonly number[];
         auto(): readonly any[];
-        field(): {
-            disabled: boolean;
-            value: string;
-            placeholder: string;
-            spellcheck: boolean;
-            autocomplete: string;
-            selectionEnd: number;
-            selectionStart: number;
-            inputMode: string;
-        };
-        attr(): {
-            maxlength: number;
-            type: string;
-        };
-        event(): {
-            input: (event?: any) => any;
-        };
+        field(): Record<string, any>;
+        attr(): Record<string, any>;
+        event(): Record<string, any>;
         plugins(): readonly any[];
         selection_watcher(): any;
         disabled(): boolean;
@@ -1514,15 +1488,14 @@ declare namespace $ {
         selection_end(): number;
         selection_start(): number;
         keyboard(): string;
+        enter(): string;
         length_max(): number;
         type(val?: any): string;
         event_change(event?: any): any;
+        submit_with_ctrl(): boolean;
         submit(event?: any): any;
         Submit(): $$.$mol_hotkey;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $.$$ {
@@ -1539,12 +1512,15 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_svg extends $mol_view {
         dom_name(): string;
         dom_name_space(): string;
         font_size(): number;
         font_family(): string;
-        style_size(): {};
+        style_size(): Record<string, any>;
     }
 }
 
@@ -1567,7 +1543,7 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $mol_svg extends $.$mol_svg {
-        computed_style(): CSSStyleDeclaration;
+        computed_style(): Record<string, any>;
         font_size(): number;
         font_family(): any;
     }
@@ -1576,10 +1552,7 @@ declare namespace $.$$ {
 declare namespace $ {
     class $mol_svg_root extends $mol_svg {
         dom_name(): string;
-        attr(): {
-            viewBox: string;
-            preserveAspectRatio: string;
-        };
+        attr(): Record<string, any>;
         view_box(): string;
         aspect(): string;
     }
@@ -1591,9 +1564,7 @@ declare namespace $ {
 declare namespace $ {
     class $mol_svg_path extends $mol_svg {
         dom_name(): string;
-        attr(): {
-            d: string;
-        };
+        attr(): Record<string, any>;
         geometry(): string;
     }
 }
@@ -1637,9 +1608,6 @@ declare namespace $ {
     function $mol_support_css_overflow_anchor(this: $): boolean;
 }
 
-declare namespace $ {
-}
-
 declare namespace $.$$ {
     class $mol_list extends $.$mol_list {
         sub(): readonly $mol_view[];
@@ -1654,15 +1622,16 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_paragraph extends $mol_view {
         line_height(): number;
         letter_width(): number;
         width_limit(): number;
+        row_width(): number;
         sub(): readonly any[];
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $.$$ {
@@ -1673,6 +1642,9 @@ declare namespace $.$$ {
         row_width(): number;
         minimal_height(): number;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -1786,9 +1758,6 @@ declare namespace $ {
     export {};
 }
 
-declare namespace $ {
-}
-
 declare namespace $.$$ {
     class $mol_dimmer extends $.$mol_dimmer {
         parts(): any[];
@@ -1796,6 +1765,9 @@ declare namespace $.$$ {
         string(index: number): string;
         view_find(check: (path: $mol_view, text?: string) => boolean, path?: $mol_view[]): Generator<$mol_view[]>;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -1817,6 +1789,8 @@ declare namespace $ {
         hint(): string;
         submit(event?: any): any;
         enabled(): boolean;
+        keyboard(): string;
+        enter(): string;
         bring(): void;
         Query(): $$.$mol_string;
         Clear_icon(): $mol_icon_cross;
@@ -1831,29 +1805,13 @@ declare namespace $ {
     }
 }
 
-declare namespace $ {
-    function $mol_fiber_defer<Value = void>(calculate: () => Value): $mol_wire_task<{}, [], Value>;
-    function $mol_fiber_root<Calculate extends (this: This, ...args: any[]) => Result, Result = void, This = void>(calculate: Calculate): Calculate;
-    function $mol_fiber_sync<Args extends any[], Value = void, This = void>(request: (this: This, ...args: Args) => PromiseLike<Value>): (...args: Args) => Value;
-    function $mol_fiber_warp(): Promise<void>;
-    class $mol_fiber_solid extends $mol_wrapper {
-        static func<This, Args extends any[], Result>(task: (this: This, ...args: Args) => Result): (this: This, ...args: Args) => Result;
-    }
-    class $mol_fiber {
-        static method: typeof $mol_wire_method;
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $.$$ {
     class $mol_search extends $.$mol_search {
         anchor_content(): ($mol_string | $mol_button_minor)[];
         suggests_showed(next?: boolean): boolean;
         suggest_selected(next?: string): void;
         nav_components(): ($mol_string | $mol_button_minor)[];
-        nav_focused(component?: $mol_view): $mol_view | $mol_string | null;
+        nav_focused(component?: $mol_view): $mol_view | $mol_string | $mol_button_minor | null;
         suggest_label(key: string): string;
         menu_items(): $mol_button_minor[];
         suggest_select(id: string, event?: MouseEvent): void;
@@ -1862,11 +1820,12 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_page extends $mol_view {
         dom_name(): string;
-        field(): {
-            tabIndex: number;
-        };
+        field(): Record<string, any>;
         sub(): readonly any[];
         tabindex(): number;
         Logo(): any;
@@ -1891,16 +1850,17 @@ declare namespace $ {
     class $mol_book2_catalog extends $mol_book2 {
         param(): string;
         spread(val?: any): string;
-        spreads(): {};
+        spreads(): Record<string, any>;
         Spread(): $mol_view;
         pages(): readonly any[];
         Spread_close(): $$.$mol_link;
+        Menu_logo(): any;
         menu_title(): string;
         menu_tools(): readonly any[];
         menu_head(): readonly any[];
         menu_filter(next?: any): string;
         Menu_filter(): $$.$mol_search;
-        arg(id: any): {};
+        arg(id: any): Record<string, any>;
         spread_title(id: any): string;
         Menu_link_title(id: any): $$.$mol_dimmer;
         menu_link_content(id: any): readonly any[];
@@ -1912,16 +1872,13 @@ declare namespace $ {
         Menu_title(): $mol_view;
         Menu_tools(): $mol_view;
         Menu(): $mol_page;
-        spread_close_arg(): {};
+        spread_close_arg(): Record<string, any>;
         Spread_close_icon(): $mol_icon_cross;
     }
 }
 
 declare namespace $ {
     function $mol_match_text<Variant>(query: string, values: (variant: Variant) => string[]): (variant: Variant) => boolean;
-}
-
-declare namespace $ {
 }
 
 declare namespace $.$$ {
@@ -1939,6 +1896,9 @@ declare namespace $.$$ {
         };
         spread_title(spread: string): any;
     }
+}
+
+declare namespace $ {
 }
 
 declare let $hyoo_sync_revision: string;
@@ -2144,7 +2104,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $hyoo_sync_peer(path: string): Promise<$hyoo_crowd_peer>;
+    function $hyoo_sync_peer(path: string, next?: string): Promise<$hyoo_crowd_peer>;
 }
 
 declare namespace $ {
@@ -2348,8 +2308,8 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_wire_race<Tasks extends (() => any)[]>(...tasks: Tasks): {
-        [index in keyof Tasks]: ReturnType<Tasks[index]>;
+    function $mol_wire_race<Tasks extends ((...args: any) => any)[]>(...tasks: Tasks): {
+        [index in keyof Tasks]: index extends number ? ReturnType<Tasks[index]> : Tasks[index];
     };
 }
 
@@ -2386,7 +2346,7 @@ declare namespace $ {
     class $hyoo_sync_yard<Line> extends $mol_object2 {
         db_unit_persisted: WeakSet<$hyoo_crowd_unit>;
         log_pack(data: any): any;
-        peer(): $hyoo_crowd_peer;
+        peer(next?: string): $hyoo_crowd_peer;
         world(): $hyoo_crowd_world;
         land_init(land: $hyoo_crowd_land): void;
         land(id: $mol_int62_string): $hyoo_crowd_land;
@@ -2402,6 +2362,7 @@ declare namespace $ {
         db_land_search(from: string | number, to?: string | number): Promise<Set<`${string}_${string}`>>;
         db_land_save(land: $hyoo_crowd_land, units: readonly $hyoo_crowd_unit[]): Promise<void>;
         master_cursor(next?: number): number;
+        master_list(): string[];
         master_link(): string;
         master(): any;
         server(): any;
@@ -2441,10 +2402,10 @@ declare namespace $ {
         get name(): string;
         get path(): string | string[];
         get incremental(): boolean;
-        get indexes(): Schema["Indexes"] extends infer T ? { [Name in keyof T]: $mol_db_index<{
+        get indexes(): { [Name in keyof Schema["Indexes"]]: $mol_db_index<{
             Key: Schema["Indexes"][Name];
             Doc: Schema['Doc'];
-        }>; } : never;
+        }>; };
         index_make(name: string, path?: string[], unique?: boolean, multiEntry?: boolean): IDBIndex;
         index_drop(name: string): this;
         get transaction(): $mol_db_transaction<$mol_db_schema>;
@@ -2552,16 +2513,8 @@ declare namespace $ {
 
 declare namespace $ {
     class $mol_theme_auto extends $mol_plugin {
-        attr(): {
-            mol_theme: string;
-        };
+        attr(): Record<string, any>;
         theme(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_media extends $mol_object2 {
-        static match(query: string, next?: boolean): boolean;
     }
 }
 
@@ -2587,13 +2540,13 @@ declare namespace $ {
     function $mol_hash_string(str: string, seed?: number): number;
 }
 
-declare namespace $ {
-}
-
 declare namespace $.$$ {
     class $mol_avatar extends $.$mol_avatar {
         path(): string;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -2615,22 +2568,13 @@ declare namespace $ {
         yard(): $hyoo_sync_yard<unknown>;
         uri(): string;
         sub(): readonly any[];
-        attr(): {
-            title: string;
-            href: string;
-            target: string;
-            download: string;
-            mol_link_current: boolean;
-        };
+        attr(): Record<string, any>;
         master_link(): string;
         Well(): $$.$mol_avatar;
         Fail(): $mol_icon_sync_off;
         hint(): string;
         message(): string;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $.$$ {
@@ -2643,17 +2587,15 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_check extends $mol_button_minor {
-        attr(): {
-            mol_check_checked: boolean;
-            "aria-checked": boolean;
-            role: string;
-            disabled: boolean;
-            tabindex: number;
-            title: string;
-        };
+        attr(): Record<string, any>;
         sub(): readonly $mol_view_content[];
-        checked(val?: any): boolean;
+        checked(next?: any): boolean;
+        aria_checked(): string;
+        aria_role(): string;
         Icon(): any;
         title(): string;
         Title(): $mol_view;
@@ -2669,6 +2611,7 @@ declare namespace $.$$ {
         click(next?: Event): void;
         sub(): readonly $mol_view_content[];
         label(): readonly any[];
+        aria_checked(): string;
     }
 }
 
@@ -2732,19 +2675,13 @@ declare namespace $ {
 
 declare namespace $ {
     class $mol_text_code_token extends $mol_dimmer {
-        attr(): {
-            mol_text_code_token_type: string;
-        };
+        attr(): Record<string, any>;
         type(): string;
     }
     class $mol_text_code_token_link extends $mol_text_code_token {
         dom_name(): string;
         type(): string;
-        attr(): {
-            href: string;
-            target: string;
-            mol_text_code_token_type: string;
-        };
+        attr(): Record<string, any>;
         uri(): string;
     }
 }
@@ -2798,14 +2735,18 @@ declare namespace $ {
         code: RegExp;
         'code-indent': RegExp;
         table: RegExp;
+        grid: RegExp;
+        cut: RegExp;
         block: RegExp;
     }>;
     var $mol_syntax2_md_line: $mol_syntax2<{
         strong: RegExp;
         emphasis: RegExp;
-        code3: RegExp;
         code: RegExp;
-        strike: RegExp;
+        insert: RegExp;
+        delete: RegExp;
+        embed: RegExp;
+        link: RegExp;
         'image-link': RegExp;
         'text-link': RegExp;
         'text-link-http': RegExp;
@@ -2828,9 +2769,6 @@ declare namespace $ {
         'code-tag': RegExp;
         'code-punctuation': RegExp;
     }>;
-}
-
-declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
@@ -2878,31 +2816,61 @@ declare namespace $.$$ {
     }
 }
 
+declare namespace $.$$ {
+}
+
 declare namespace $ {
-    class $mol_icon_content_copy extends $mol_icon {
+    type $mol_blob = Blob;
+    let $mol_blob: {
+        new (blobParts?: readonly BlobPart[], options?: BlobPropertyBag): Blob;
+        prototype: Blob;
+    };
+}
+
+declare namespace $ {
+    class $mol_icon_clipboard extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_icon_clipboard_outline extends $mol_icon {
         path(): string;
     }
 }
 
 declare namespace $ {
     class $mol_button_copy extends $mol_button_minor {
-        text(): string;
+        blobs(): readonly Blob[];
+        data(): Record<string, any>;
         sub(): readonly any[];
-        Icon(): $mol_icon_content_copy;
+        text(): string;
+        text_blob(next?: any): Blob;
+        html(): string;
+        html_blob(next?: any): Blob;
+        Icon(): $mol_icon_clipboard_outline;
+        title(): string;
     }
+}
+
+declare namespace $ {
+    function $mol_html_encode(text: string): string;
 }
 
 declare namespace $.$$ {
     class $mol_button_copy extends $.$mol_button_copy {
+        data(): {
+            [k: string]: Blob;
+        };
+        html(): string;
+        attachments(): ClipboardItem[];
         click(event?: Event): void;
     }
 }
 
 declare namespace $ {
     class $mol_text_code extends $mol_stack {
-        attr(): {
-            mol_text_code_sidebar_showed: boolean;
-        };
+        attr(): Record<string, any>;
         text(): string;
         text_lines(): readonly string[];
         find_pos(id: any): any;
@@ -2918,11 +2886,9 @@ declare namespace $ {
         Row(id: any): $$.$mol_text_code_row;
         rows(): readonly any[];
         Rows(): $$.$mol_list;
+        text_export(): string;
         Copy(): $$.$mol_button_copy;
     }
-}
-
-declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
@@ -2957,20 +2923,20 @@ declare namespace $.$$ {
         }>;
         uri_base(): string;
         uri_resolve(uri: string): string;
+        text_export(): string;
     }
+}
+
+declare namespace $.$$ {
 }
 
 declare namespace $ {
     class $mol_textarea extends $mol_stack {
-        attr(): {
-            mol_textarea_clickable: boolean;
-            mol_textarea_sidebar_showed: boolean;
-        };
-        event(): {
-            keydown: (event?: any) => any;
-            pointermove: (event?: any) => any;
-        };
+        attr(): Record<string, any>;
+        event(): Record<string, any>;
         sub(): readonly any[];
+        symbols_alt(): Record<string, any>;
+        symbols_alt_shift(): Record<string, any>;
         clickable(val?: any): boolean;
         sidebar_showed(): boolean;
         press(event?: any): any;
@@ -2981,6 +2947,7 @@ declare namespace $ {
         spellcheck(): boolean;
         length_max(): number;
         selection(val?: any): readonly number[];
+        submit(next?: any): any;
         bring(): void;
         Edit(): $mol_textarea_edit;
         row_numb(id: any): number;
@@ -2989,30 +2956,723 @@ declare namespace $ {
     }
     class $mol_textarea_edit extends $mol_string {
         dom_name(): string;
-        field(): {
-            scrollTop: number;
-            disabled: boolean;
-            value: string;
-            placeholder: string;
-            spellcheck: boolean;
-            autocomplete: string;
-            selectionEnd: number;
-            selectionStart: number;
-            inputMode: string;
-        };
+        enter(): string;
+        field(): Record<string, any>;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $.$$ {
     class $mol_textarea extends $.$mol_textarea {
         indent_inc(): void;
         indent_dec(): void;
+        symbol_insert(event: KeyboardEvent): void;
         hover(event: PointerEvent): void;
         press(event: KeyboardEvent): void;
         row_numb(index: number): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_time_base {
+        static patterns: Record<string, (arg: any) => string>;
+        static formatter(pattern: string): (arg: any) => string;
+        toString(pattern: string): string;
+    }
+}
+
+declare namespace $ {
+    type $mol_time_duration_config = number | string | {
+        year?: number;
+        month?: number;
+        day?: number;
+        hour?: number;
+        minute?: number;
+        second?: number;
+    };
+    class $mol_time_duration extends $mol_time_base {
+        constructor(config?: $mol_time_duration_config);
+        readonly year: number;
+        readonly month: number;
+        readonly day: number;
+        readonly hour: number;
+        readonly minute: number;
+        readonly second: number;
+        summ(config: $mol_time_duration_config): $mol_time_duration;
+        mult(numb: number): $mol_time_duration;
+        count(config: $mol_time_duration_config): number;
+        valueOf(): number;
+        toJSON(): string;
+        toString(pattern?: string): string;
+        [Symbol.toPrimitive](mode: 'default' | 'number' | 'string'): string | number;
+        static patterns: {
+            '#Y': (duration: $mol_time_duration) => string;
+            '#M': (duration: $mol_time_duration) => string;
+            '#D': (duration: $mol_time_duration) => string;
+            '#h': (duration: $mol_time_duration) => string;
+            '#m': (duration: $mol_time_duration) => string;
+            '#s': (duration: $mol_time_duration) => string;
+        };
+    }
+}
+
+declare namespace $ {
+    enum $mol_time_moment_weekdays {
+        monday = 0,
+        tuesday = 1,
+        wednesday = 2,
+        thursday = 3,
+        friday = 4,
+        saturday = 5,
+        sunday = 6
+    }
+    type $mol_time_moment_config = number | Date | string | {
+        year?: number;
+        month?: number;
+        day?: number;
+        hour?: number;
+        minute?: number;
+        second?: number;
+        offset?: $mol_time_duration_config;
+    };
+    class $mol_time_moment extends $mol_time_base {
+        constructor(config?: $mol_time_moment_config);
+        readonly year: number | undefined;
+        readonly month: number | undefined;
+        readonly day: number | undefined;
+        readonly hour: number | undefined;
+        readonly minute: number | undefined;
+        readonly second: number | undefined;
+        readonly offset: $mol_time_duration | undefined;
+        get weekday(): number;
+        _native: Date | undefined;
+        get native(): Date;
+        _normal: $mol_time_moment | undefined;
+        get normal(): $mol_time_moment;
+        merge(config: $mol_time_moment_config): $mol_time_moment;
+        shift(config: $mol_time_duration_config): $mol_time_moment;
+        mask(config: $mol_time_moment_config): $mol_time_moment;
+        toOffset(config?: $mol_time_duration_config): $mol_time_moment;
+        valueOf(): number;
+        toJSON(): string;
+        toString(pattern?: string): string;
+        [Symbol.toPrimitive](mode: 'default' | 'number' | 'string'): string | number;
+        static patterns: {
+            YYYY: (moment: $mol_time_moment) => string;
+            AD: (moment: $mol_time_moment) => string;
+            YY: (moment: $mol_time_moment) => string;
+            Month: (moment: $mol_time_moment) => string;
+            'DD Month': (moment: $mol_time_moment) => string;
+            'D Month': (moment: $mol_time_moment) => string;
+            Mon: (moment: $mol_time_moment) => string;
+            'DD Mon': (moment: $mol_time_moment) => string;
+            'D Mon': (moment: $mol_time_moment) => string;
+            '-MM': (moment: $mol_time_moment) => string;
+            MM: (moment: $mol_time_moment) => string;
+            M: (moment: $mol_time_moment) => string;
+            WeekDay: (moment: $mol_time_moment) => string;
+            WD: (moment: $mol_time_moment) => string;
+            '-DD': (moment: $mol_time_moment) => string;
+            DD: (moment: $mol_time_moment) => string;
+            D: (moment: $mol_time_moment) => string;
+            Thh: (moment: $mol_time_moment) => string;
+            hh: (moment: $mol_time_moment) => string;
+            h: (moment: $mol_time_moment) => string;
+            ':mm': (moment: $mol_time_moment) => string;
+            mm: (moment: $mol_time_moment) => string;
+            m: (moment: $mol_time_moment) => string;
+            ':ss': (moment: $mol_time_moment) => string;
+            ss: (moment: $mol_time_moment) => string;
+            s: (moment: $mol_time_moment) => string;
+            '.sss': (moment: $mol_time_moment) => string;
+            sss: (moment: $mol_time_moment) => string;
+            Z: (moment: $mol_time_moment) => string;
+        };
+    }
+}
+
+declare namespace $ {
+    class $hyoo_idea_plural extends $mol_object2 {
+        zero(): string;
+        one(): string;
+        two(): string;
+        few(): string;
+        many(): string;
+        other(): string;
+    }
+}
+
+declare namespace $.$$ {
+    class $hyoo_idea_plural extends $.$hyoo_idea_plural {
+        plural_rules(): Intl.PluralRules;
+        select(num: number): string;
+    }
+}
+
+declare namespace $ {
+    class $hyoo_idea_ago extends $mol_view {
+        param_count(): string;
+        param_unit(): string;
+        title(): string;
+        now(): string;
+        moment(): $mol_time_moment;
+        sub(): readonly any[];
+        units(): Record<string, any>;
+        ago(): string;
+        second(): $$.$hyoo_idea_plural;
+        minute(): $$.$hyoo_idea_plural;
+        hour(): $$.$hyoo_idea_plural;
+        day(): $$.$hyoo_idea_plural;
+        month(): $$.$hyoo_idea_plural;
+        year(): $$.$hyoo_idea_plural;
+    }
+}
+
+declare namespace $.$$ {
+    class $hyoo_idea_ago extends $.$hyoo_idea_ago {
+        SECOND: number;
+        MINUTE: number;
+        HOUR: number;
+        DAY: number;
+        MONTH: number;
+        YEAR: number;
+        unit(ms: number): "second" | "minute" | "hour" | "day" | "month" | "year";
+        ago(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_float extends $mol_view {
+        style(): Record<string, any>;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_icon_chevron extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_check_expand extends $mol_check {
+        Icon(): $mol_icon_chevron;
+        level(): number;
+        style(): Record<string, any>;
+        checked(val?: any): boolean;
+        enabled(): boolean;
+        level_style(): string;
+        expanded(val?: any): boolean;
+        expandable(): boolean;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_check_expand extends $.$mol_check_expand {
+        level_style(): string;
+        expandable(): boolean;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_grid extends $mol_view {
+        row_height(): number;
+        row_ids(): readonly string[][];
+        row_id(id: any): any;
+        col_ids(): readonly any[];
+        records(): Record<string, any>;
+        record(id: any): any;
+        hierarchy(): any;
+        hierarchy_col(): string;
+        minimal_width(): number;
+        sub(): readonly any[];
+        Head(): $mol_grid_row;
+        Row(id: any): $mol_grid_row;
+        Cell(id: any): $mol_view;
+        cell(id: any): any;
+        Cell_text(id: any): $mol_grid_cell;
+        Cell_number(id: any): $mol_grid_number;
+        Col_head(id: any): $mol_float;
+        Cell_branch(id: any): $$.$mol_check_expand;
+        Cell_content(id: any): readonly any[];
+        rows(): readonly $mol_view[];
+        Table(): $mol_grid_table;
+        head_cells(): readonly $mol_view[];
+        cells(id: any): readonly $mol_view[];
+        cell_content(id: any): readonly $mol_view_content[];
+        cell_content_text(id: any): readonly $mol_view_content[];
+        cell_content_number(id: any): readonly $mol_view_content[];
+        col_head_content(id: any): readonly $mol_view_content[];
+        cell_level(id: any): number;
+        cell_expanded(id: any, val?: any): boolean;
+        needle(): string;
+        cell_value(id: any): string;
+        Cell_dimmer(id: any): $$.$mol_dimmer;
+    }
+    class $mol_grid_table extends $mol_list {
+    }
+    class $mol_grid_row extends $mol_view {
+        sub(): readonly $mol_view[];
+        cells(): readonly $mol_view[];
+    }
+    class $mol_grid_cell extends $mol_view {
+        minimal_height(): number;
+    }
+    class $mol_grid_number extends $mol_grid_cell {
+    }
+}
+
+declare namespace $ {
+    class $mol_state_session<Value> extends $mol_object {
+        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
+        static native(): Storage | {
+            getItem(key: string): any;
+            setItem(key: string, value: string): void;
+            removeItem(key: string): void;
+        };
+        static value<Value>(key: string, next?: Value): Value;
+        prefix(): string;
+        value(key: string, next?: Value): Value;
+    }
+}
+
+declare namespace $.$$ {
+    interface $mol_grid_node {
+        id: string;
+        parent: $mol_grid_node;
+        sub: $mol_grid_node[];
+    }
+    class $mol_grid extends $.$mol_grid {
+        head_cells(): readonly $mol_view[];
+        col_head_content(colId: string): readonly string[];
+        rows(): readonly $mol_view[];
+        cells(row_id: string[]): readonly $mol_view[];
+        col_type(col_id: string): "text" | "number" | "branch";
+        Cell(id: {
+            row: string[];
+            col: string;
+        }): $mol_view;
+        cell_content(id: {
+            row: string[];
+            col: string;
+        }): any[];
+        cell_content_text(id: {
+            row: string[];
+            col: string;
+        }): any[];
+        records(): any;
+        record(id: string): any;
+        record_ids(): string[];
+        row_id(index: number): string;
+        col_ids(): readonly string[];
+        hierarchy(): {
+            [id: string]: $mol_grid_node;
+        };
+        row_sub_ids(row: string[]): string[][];
+        row_root_id(): string[];
+        cell_level(id: {
+            row: string[];
+        }): number;
+        row_ids(): readonly string[][];
+        row_expanded(row_id: string[], next?: boolean): boolean | null;
+        row_expanded_default(row_id: string[]): boolean;
+        cell_expanded(id: {
+            row: string[];
+        }, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_image extends $mol_view {
+        dom_name(): string;
+        field(): Record<string, any>;
+        attr(): Record<string, any>;
+        event(): Record<string, any>;
+        minimal_width(): number;
+        minimal_height(): number;
+        uri(): string;
+        loading(): string;
+        decoding(): string;
+        cors(): any;
+        natural_width(next?: any): number;
+        natural_height(next?: any): number;
+        load(next?: any): any;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_image extends $.$mol_image {
+        natural_width(next?: null): number;
+        natural_height(next?: null): number;
+        load(): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_link_iconed extends $mol_link {
+        sub(): readonly any[];
+        content(): readonly any[];
+        host(): string;
+        icon(): string;
+        Icon(): $$.$mol_image;
+        title(): string;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_link_iconed extends $.$mol_link_iconed {
+        icon(): string;
+        host(): string;
+        title(): string;
+        sub(): readonly any[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_embed_native extends $mol_scroll {
+        uri(val?: any): string;
+        dom_name(): string;
+        window(): any;
+        attr(): Record<string, any>;
+        sub(): readonly any[];
+        message(): Record<string, any>;
+        mime(): string;
+        title(): string;
+        Fallback(): $$.$mol_link;
+        uri_change(next?: any): any;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_embed_native extends $.$mol_embed_native {
+        window(): Window;
+        load(frame: HTMLIFrameElement): Promise<Window>;
+        uri_resource(): string;
+        message_listener(): $mol_dom_listener;
+        message_receive(event?: MessageEvent<[string, string]>): void;
+        uri_change(event: MessageEvent<[string, string]>): void;
+        auto(): (Window | $mol_dom_listener)[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_icon_youtube extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_frame extends $mol_embed_native {
+        dom_name(): string;
+        attr(): Record<string, any>;
+        fullscreen(): boolean;
+        accelerometer(): boolean;
+        autoplay(): boolean;
+        encription(): boolean;
+        gyroscope(): boolean;
+        pip(): boolean;
+        clipboard_read(): boolean;
+        clipboard_write(): boolean;
+        uri(val?: any): string;
+        html(): any;
+        allow(): string;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_frame extends $.$mol_frame {
+        window(): any;
+        allow(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_embed_youtube extends $mol_check {
+        uri(): string;
+        video_preview(): string;
+        video_id(): string;
+        checked(next?: any): boolean;
+        sub(): readonly any[];
+        active(next?: any): boolean;
+        title(): string;
+        Image(): $$.$mol_image;
+        Hint(): $mol_icon_youtube;
+        video_embed(): string;
+        Frame(): $$.$mol_frame;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_embed_youtube extends $.$mol_embed_youtube {
+        video_embed(): string;
+        video_id(): string;
+        video_preview(): string;
+        sub(): $mol_frame[] | ($mol_image | $mol_icon_youtube)[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_embed_any extends $mol_view {
+        Image(): $$.$mol_image;
+        Object(): $$.$mol_embed_native;
+        Youtube(): $$.$mol_embed_youtube;
+        title(): string;
+        uri(): string;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_embed_any extends $.$mol_embed_any {
+        type(): "object" | "image" | "youtube";
+        sub(): $mol_image[] | $mol_embed_youtube[] | $mol_embed_native[];
+    }
+}
+
+declare namespace $ {
+    class $mol_text extends $mol_list {
+        uri_base(): string;
+        text(): string;
+        param(): string;
+        flow_tokens(): readonly any[];
+        auto(): readonly any[];
+        Paragraph(id: any): $$.$mol_paragraph;
+        Quote(id: any): $$.$mol_text;
+        List(id: any): $mol_text_list;
+        item_index(id: any): number;
+        Header(id: any): $$.$mol_text_header;
+        Pre(id: any): $$.$mol_text_code;
+        Cut(id: any): $mol_view;
+        Table(id: any): $$.$mol_grid;
+        Table_row(id: any): $mol_grid_row;
+        Table_cell(id: any): $$.$mol_text;
+        Grid(id: any): $$.$mol_grid;
+        Grid_row(id: any): $mol_grid_row;
+        Grid_cell(id: any): $$.$mol_text;
+        String(id: any): $$.$mol_dimmer;
+        Span(id: any): $mol_text_span;
+        Code_line(id: any): $$.$mol_text_code_row;
+        Link(id: any): $$.$mol_link_iconed;
+        Link_http(id: any): $$.$mol_link_iconed;
+        Embed(id: any): $$.$mol_embed_any;
+        auto_scroll(): any;
+        block_content(id: any): readonly any[];
+        uri_resolve(id: any): string;
+        quote_text(id: any): string;
+        highlight(): string;
+        list_type(id: any): string;
+        list_text(id: any): string;
+        header_level(id: any): number;
+        header_arg(id: any): Record<string, any>;
+        pre_text(id: any): string;
+        code_sidebar_showed(): boolean;
+        pre_sidebar_showed(): boolean;
+        table_head_cells(id: any): readonly any[];
+        table_rows(id: any): readonly any[];
+        table_cells(id: any): readonly any[];
+        table_cell_text(id: any): string;
+        grid_rows(id: any): readonly any[];
+        grid_cells(id: any): readonly any[];
+        grid_cell_text(id: any): string;
+        line_text(id: any): string;
+        line_type(id: any): string;
+        line_content(id: any): readonly any[];
+        code_syntax(): any;
+        link_uri(id: any): string;
+        link_host(id: any): string;
+    }
+    class $mol_text_header extends $mol_paragraph {
+        level(): number;
+        sub(): readonly any[];
+        arg(): Record<string, any>;
+        content(): readonly any[];
+        Link(): $$.$mol_link;
+    }
+    class $mol_text_span extends $mol_paragraph {
+        dom_name(): string;
+        attr(): Record<string, any>;
+        type(): string;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_text extends $.$mol_text {
+        flow_tokens(): readonly {
+            name: string;
+            found: string;
+            chunks: string[];
+        }[];
+        block_type(index: number): string;
+        rows(): ($mol_view | $mol_paragraph | $mol_text_code | $mol_grid | $mol_text_header)[];
+        param(): string;
+        header_level(index: number): number;
+        header_arg(index: number): {
+            [x: string]: string;
+        };
+        list_type(index: number): string;
+        item_index(index: number): number;
+        pre_text(index: number): string;
+        quote_text(index: number): string;
+        list_text(index: number): string;
+        cell_content(indexBlock: number): string[][];
+        table_rows(blockId: number): $mol_grid_row[];
+        table_head_cells(blockId: number): $mol_text[];
+        table_cells(id: {
+            block: number;
+            row: number;
+        }): $mol_text[];
+        table_cell_text(id: {
+            block: number;
+            row: number;
+            cell: number;
+        }): string;
+        grid_content(indexBlock: number): string[][];
+        grid_rows(blockId: number): $mol_grid_row[];
+        grid_cells(id: {
+            block: number;
+            row: number;
+        }): $mol_text[];
+        grid_cell_text(id: {
+            block: number;
+            row: number;
+            cell: number;
+        }): string;
+        uri_base(): string;
+        uri_resolve(uri: string): string;
+        code_syntax(): $mol_syntax2<{
+            'code-indent': RegExp;
+            'code-docs': RegExp;
+            'code-comment-block': RegExp;
+            'code-link': RegExp;
+            'code-comment-inline': RegExp;
+            'code-string': RegExp;
+            'code-number': RegExp;
+            'code-call': RegExp;
+            'code-sexpr': RegExp;
+            'code-field': RegExp;
+            'code-keyword': RegExp;
+            'code-global': RegExp;
+            'code-word': RegExp;
+            'code-decorator': RegExp;
+            'code-tag': RegExp;
+            'code-punctuation': RegExp;
+        }>;
+        block_text(index: number): string;
+        block_content(index: number): ($mol_dimmer | $mol_text_code_row | $mol_link_iconed | $mol_embed_any | $mol_text_span)[];
+        line_tokens(path: readonly number[]): readonly {
+            name: string;
+            found: string;
+            chunks: string[];
+        }[];
+        line_token(path: readonly number[]): {
+            name: string;
+            found: string;
+            chunks: string[];
+        };
+        line_type(path: readonly number[]): string;
+        line_text(path: readonly number[]): string;
+        line_content(path: readonly number[]): ($mol_dimmer | $mol_text_code_row | $mol_link_iconed | $mol_embed_any | $mol_text_span)[];
+        link_uri(path: readonly number[]): string;
+        link_host(path: readonly number[]): string;
+        auto_scroll(): void;
+    }
+    class $mol_text_header extends $.$mol_text_header {
+        dom_name(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_icon_send extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_bar extends $mol_view {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_text_list extends $mol_text {
+        auto_scroll(): any;
+        attr(): Record<string, any>;
+        Paragraph(id: any): $mol_text_list_item;
+        type(): string;
+    }
+    class $mol_text_list_item extends $mol_paragraph {
+        attr(): Record<string, any>;
+        index(): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $blog extends $mol_book2_catalog {
+        param(): string;
+        plugins(): readonly any[];
+        yard(): $hyoo_sync_client;
+        menu_tools(): readonly any[];
+        menu_title(): string;
+        Note(id: any): $mol_page;
+        Theme(): $$.$mol_theme_auto;
+        Online(): $$.$hyoo_sync_online;
+        Lighter(): $$.$mol_lights_toggle;
+        add_note(): any;
+        add_icon(): $mol_icon_plus;
+        Add_note(): $mol_button_minor;
+        share_note(id: any): any;
+        share_icon(): $mol_icon_share;
+        Share_note(id: any): $$.$mol_link;
+        current_title(id: any, next?: any): string;
+        Note_title(id: any): $mol_string_button;
+        text(id: any, next?: any): string;
+        Input(id: any): $$.$mol_textarea;
+        comment_created_moment(id: any): $mol_time_moment;
+        Comment_ago(id: any): $$.$hyoo_idea_ago;
+        comment_text(id: any): string;
+        Comment_text(id: any): $$.$mol_text;
+        Name_sub_list(id: any): $$.$mol_list;
+        Comment(id: any): $$.$mol_list;
+        comment(next?: any): string;
+        Text(): $$.$mol_textarea;
+        comment_add(id: any, next?: any): any;
+        Submit_icon(): $mol_icon_send;
+        Submit(id: any): $mol_button_minor;
+        Comment_add(id: any): $mol_bar;
+        comment_rows(id: any): readonly any[];
+        Comments(id: any): $$.$mol_list;
     }
 }
 
@@ -3030,6 +3690,81 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $hyoo_crowd_list extends $hyoo_crowd_node {
+        list(next?: readonly unknown[]): readonly unknown[];
+        set(next?: ReadonlySet<string | number | boolean | null>): Set<unknown>;
+        insert(next: readonly unknown[], from?: number, to?: number): void;
+        move(from: number, to: number): void;
+        cut(seat: number): $hyoo_crowd_unit;
+        has(val: string | number | boolean | null, next?: boolean): boolean;
+        add(val: string | number | boolean | null): void;
+        drop(val: string | number | boolean | null): void;
+        node_make<Node extends typeof $hyoo_crowd_node>(val: unknown, Node: Node): InstanceType<Node>;
+    }
+}
+
+declare namespace $ {
+    function $mol_guard_defined<T>(value: T): value is NonNullable<T>;
+}
+
+declare namespace $ {
+    class $blog_entity_links<Item extends typeof $hyoo_crowd_node> extends $hyoo_crowd_list {
+        Item: Item;
+        fund(): $hyoo_crowd_fund<Item>;
+        ids(): `${string}_${string}`[];
+        length(): number;
+        item(id: $mol_int62_string): InstanceType<Item>;
+        items(): InstanceType<Item>[];
+        item_make(): InstanceType<Item>;
+        item_push(obj: InstanceType<Item>): InstanceType<Item>;
+        item_drop(obj: InstanceType<Item>): void;
+        item_has(obj: InstanceType<Item>): boolean;
+    }
+}
+
+declare namespace $ {
+    let $hyoo_crowd_tokenizer: RegExp;
+}
+
+declare namespace $ {
+    class $hyoo_crowd_text extends $hyoo_crowd_node {
+        text(next?: string): string;
+        str(next?: string): string;
+        write(next: string, str_from?: number, str_to?: number): this;
+        point_by_offset(offset: number): readonly [$mol_int62_string, number];
+        offset_by_point([self, offset]: [$mol_int62_string, number]): readonly [$mol_int62_string, number];
+        selection(peer: $mol_int62_string, next?: number[]): number[];
+    }
+}
+
+declare namespace $ {
+    class $blog_comment extends $hyoo_crowd_struct {
+        id(): `${string}_${string}`;
+        text(next?: string): string;
+        created_moment(): $mol_time_moment;
+    }
+}
+
+declare namespace $ {
+    class $blog_post extends $hyoo_crowd_struct {
+        id(): `${string}_${string}`;
+        title(next?: string): string;
+        text(next?: string): string;
+        comments(): $blog_entity_links<typeof $blog_comment>;
+        comment_add(text: string): void;
+        created_moment(): $mol_time_moment;
+    }
+}
+
+declare namespace $ {
+    class $blog_person extends $hyoo_crowd_struct {
+        id(): `${string}_${string}`;
+        data(): $hyoo_crowd_struct;
+        posts(): $blog_entity_links<typeof $blog_post>;
+    }
+}
+
+declare namespace $ {
     class $hyoo_crowd_dict extends $hyoo_crowd_node {
         keys(next?: string[]): string[];
         sub<Node extends typeof $hyoo_crowd_node>(key: string, Node: Node): InstanceType<Node>;
@@ -3040,29 +3775,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $blog extends $mol_book2_catalog {
-        plugins(): readonly any[];
-        yard(): $hyoo_sync_client;
-        menu_tools(): readonly any[];
-        menu_title(): string;
-        spreads(): readonly any[];
-        Note(id: any): $mol_page;
-        Theme(): $$.$mol_theme_auto;
-        Online(): $$.$hyoo_sync_online;
-        Lighter(): $$.$mol_lights_toggle;
-        add_note(): any;
-        add_icon(): $mol_icon_plus;
-        Add_note(): $mol_button_minor;
-        notes_view(): readonly any[];
-        share_note(id: any): any;
-        share_icon(): $mol_icon_share;
-        Share_note(id: any): $$.$mol_link;
-        current_title(id: any, next?: any): string;
-        Note_title(id: any): $mol_string_button;
-        text(id: any, next?: any): string;
-        i_can_mod(id: any): boolean;
-        Input(id: any): $$.$mol_textarea;
-    }
+    function $mol_offline(): void;
 }
 
 declare namespace $ {
@@ -3070,16 +3783,29 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $blog extends $.$blog {
-        text(id: any, next?: any): string;
-        current_title(id: any, next?: any): string;
+        home(): $hyoo_crowd_land;
+        user(): $blog_person;
+        text(post: $blog_post, next?: any): string;
+        current_title(post: $blog_post, next?: string): string;
         i_can_mod(id: $mol_int62_string): boolean;
         root_id(): `${string}_${string}`;
-        notes(): $hyoo_crowd_dict;
+        notes(): $hyoo_crowd_struct;
         note(id: string): $hyoo_crowd_dict;
-        notes_view(): $mol_page[];
+        spreads(): any;
         add_note(): void;
-        share_note(id: any): string;
+        share_note(post: $blog_post): string;
+        seed_id(id?: any): any;
+        comment_rows(post: $blog_post): ($mol_list | $mol_bar)[];
+        comment_text(comment: $blog_comment): string;
+        comment_created_moment(comment: $blog_comment): $mol_time_moment;
+        comment_add(post: $blog_post): void;
     }
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
 }
 
 export = $;
