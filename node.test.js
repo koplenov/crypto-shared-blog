@@ -13563,9 +13563,13 @@ var $;
                 return next;
             return "";
         }
+        i_can_mod(id) {
+            return false;
+        }
         Input(id) {
             const obj = new this.$.$mol_textarea();
             obj.value = (next) => this.text(id, next);
+            obj.enabled = () => this.i_can_mod(id);
             obj.minimal_height = () => 250;
             return obj;
         }
@@ -14228,53 +14232,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_crowd_dict extends $hyoo_crowd_node {
-        keys(next) {
-            const prev = this.units();
-            if (!next)
-                return prev.map(unit => String(unit.data));
-            $mol_reconcile({
-                prev,
-                from: 0,
-                to: prev.length,
-                next,
-                equal: (next, prev) => prev.data === next,
-                drop: (prev, lead) => this.land.wipe(prev),
-                insert: (next, lead) => this.land.put(this.head, $mol_int62_hash_string(next + '\n' + this.head), lead?.self ?? '0_0', next),
-            });
-            return next;
-        }
-        sub(key, Node) {
-            this.add(key);
-            return new Node(this.land, $mol_int62_hash_string(key + '\n' + this.head));
-        }
-        has(key) {
-            for (const unit of this.units()) {
-                if (unit.data === key)
-                    return true;
-            }
-            return false;
-        }
-        add(key) {
-            if (this.has(key))
-                return;
-            this.keys([...this.keys(), key]);
-        }
-        drop(key) {
-            for (const unit of this.units()) {
-                if (unit.data !== key)
-                    continue;
-                this.land.wipe(unit);
-            }
-        }
-    }
-    $.$hyoo_crowd_dict = $hyoo_crowd_dict;
-})($ || ($ = {}));
-//hyoo/crowd/dict/dict.ts
-;
-"use strict";
-var $;
-(function ($) {
     function $mol_offline() { }
     $.$mol_offline = $mol_offline;
 })($ || ($ = {}));
@@ -14320,23 +14277,16 @@ var $;
                     id = $mol_state_local.value(key, this.yard().land_grab().id());
                 return id;
             }
-            notes() {
-                return this.yard().world().Fund($hyoo_crowd_struct).Item(this.root_id());
-            }
-            note(id) {
-                return this.notes().sub(id, $hyoo_crowd_dict);
-            }
             spreads() {
+                return this.user().posts().items().map(post => this.Note(post));
                 return this.user().posts().items().reduce((dict, post) => {
                     dict[post.id()] = this.Note(post);
                     return dict;
                 }, {});
-                return [
-                    { data: $mol_state_arg.value("id") },
-                    ...this.notes().units()
-                ]
-                    .filter(note => note.data)
-                    .map(note => this.Note(note.data));
+            }
+            Spread() {
+                return this.spreads()[this.spread()]
+                    || this.yard().world().Fund($blog_post).Item(this.spread());
             }
             add_note() {
                 this.user().posts().item_make();
@@ -14382,12 +14332,6 @@ var $;
         __decorate([
             $mol_mem
         ], $blog.prototype, "root_id", null);
-        __decorate([
-            $mol_mem
-        ], $blog.prototype, "notes", null);
-        __decorate([
-            $mol_mem_key
-        ], $blog.prototype, "note", null);
         __decorate([
             $mol_mem
         ], $blog.prototype, "spreads", null);

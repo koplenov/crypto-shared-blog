@@ -3658,6 +3658,7 @@ declare namespace $ {
         current_title(id: any, next?: any): string;
         Note_title(id: any): $mol_string_button;
         text(id: any, next?: any): string;
+        i_can_mod(id: any): boolean;
         Input(id: any): $$.$mol_textarea;
         comment_created_moment(id: any): $mol_time_moment;
         Comment_ago(id: any): $$.$hyoo_idea_ago;
@@ -3765,16 +3766,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $hyoo_crowd_dict extends $hyoo_crowd_node {
-        keys(next?: string[]): string[];
-        sub<Node extends typeof $hyoo_crowd_node>(key: string, Node: Node): InstanceType<Node>;
-        has(key: string): boolean;
-        add(key: string): void;
-        drop(key: string): void;
-    }
-}
-
-declare namespace $ {
     function $mol_offline(): void;
 }
 
@@ -3789,9 +3780,8 @@ declare namespace $.$$ {
         current_title(post: $blog_post, next?: string): string;
         i_can_mod(id: $mol_int62_string): boolean;
         root_id(): `${string}_${string}`;
-        notes(): $hyoo_crowd_struct;
-        note(id: string): $hyoo_crowd_dict;
         spreads(): any;
+        Spread(): any;
         add_note(): void;
         share_note(post: $blog_post): string;
         seed_id(id?: any): any;
