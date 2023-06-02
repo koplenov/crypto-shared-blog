@@ -3847,8 +3847,8 @@ declare namespace $.$$ {
         current_title(post: $blog_post, next?: string): string;
         i_can_mod(id: $mol_int62_string): boolean;
         root_id(): `${string}_${string}`;
-        spreads(): $mol_page[];
-        Spread(): $mol_view;
+        spreads(): any;
+        Spread(): any;
         add_note(): void;
         share_note(post: $blog_post): string;
         seed_id(id?: any): any;
