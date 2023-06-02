@@ -38,12 +38,15 @@ namespace $.$$ {
 
 		@$mol_mem
 		spreads() {
-			return this.user().posts().items().map( post => this.Note( post ) )
+			return this.user().posts().items().reduce( ( dict, post ) => {
+				dict[ post.id() ] = this.Note( post )
+				return dict
+			}, {} as any )
 		}
 
 		@ $mol_mem
 		Spread() {
-			return super.Spread() ?? this.Note( this.user().posts().item( this.spread() as $mol_int62_string ) )
+			return (super.Spread() ?? this.spread() !== "" ? this.Note( this.user().posts().item(this.spread() as $mol_int62_string )) : undefined) as any
 		}
 
 		@$mol_action
