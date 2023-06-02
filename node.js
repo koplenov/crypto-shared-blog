@@ -14275,8 +14275,8 @@ var $;
             current_title(post, next) {
                 return post.title(next) || super.current_title(post);
             }
-            i_can_mod(id) {
-                return this.yard().land(id).allowed_mod();
+            i_can_mod(post) {
+                return post.land.allowed_mod();
             }
             spreads() {
                 return this.user().posts().items().reduce((dict, post) => {

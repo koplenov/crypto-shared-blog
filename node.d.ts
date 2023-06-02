@@ -258,7 +258,7 @@ declare namespace $ {
         static getter<Host, Args extends readonly unknown[], Result>(task: (this: Host, ...args: Args) => Result): (host: Host, args: Args) => $mol_wire_task<Host, Args, Result>;
         get temp(): boolean;
         complete(): void;
-        put(next: Result | Error | Promise<Result | Error>): Result | Error | Promise<Result | Error>;
+        put(next: Result | Error | Promise<Result | Error>): Error | Result | Promise<Error | Result>;
     }
 }
 
@@ -3845,7 +3845,7 @@ declare namespace $.$$ {
         user(): $blog_person;
         text(post: $blog_post, next?: any): string;
         current_title(post: $blog_post, next?: string): string;
-        i_can_mod(id: $mol_int62_string): boolean;
+        i_can_mod(post: $blog_post): boolean;
         spreads(): any;
         Spread(): any;
         add_note(): void;
