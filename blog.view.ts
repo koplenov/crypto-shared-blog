@@ -37,28 +37,18 @@ namespace $.$$ {
 		}
 
 		@$mol_mem
-		notes() {
-			return this.yard().world().Fund( $hyoo_crowd_struct ).Item( this.root_id() )
-		}
-
-		@$mol_mem_key
-		note( id: string ) {
-			return this.notes().sub( id, $hyoo_crowd_dict )
-		}
-
-		@$mol_mem
 		spreads() {
+			return this.user().posts().items().map(post => this.Note(post))
+
 			return this.user().posts().items().reduce( ( dict, post ) => {
 				dict[ post.id() ] = this.Note( post )
 				return dict
 			}, {} as any )
+		}
 
-			return [
-				{ data: $mol_state_arg.value( "id" ) },
-				...this.notes().units()
-			]
-				.filter( note => note.data )
-				.map( note => this.Note( note.data ) )
+		Spread() {
+			return this.spreads()[ this.spread() ]
+				|| this.yard().world().Fund( $blog_post ).Item( this.spread() as $mol_int62_string )
 		}
 
 		@$mol_action
