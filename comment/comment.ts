@@ -11,7 +11,7 @@ namespace $ {
 			return this.sub( 'text', $hyoo_crowd_reg ).str( next ) ?? ''
 		}
 
-		@ $mol_mem
+		@$mol_mem
 		created_moment() {
 			const ms = this.land.first_stamp() ?? 0
 			return new $mol_time_moment( ms )

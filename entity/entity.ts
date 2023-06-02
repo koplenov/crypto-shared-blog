@@ -4,12 +4,12 @@ namespace $ {
 
 		Item = null as unknown as Item
 
-		@ $mol_mem
+		@$mol_mem
 		fund() {
 			return this.world()!.Fund( this.Item )
 		}
 
-		@ $mol_mem
+		@$mol_mem
 		ids() {
 			const ids = this.list()
 			return ids
@@ -21,37 +21,37 @@ namespace $ {
 			return this.ids().length
 		}
 
-		@ $mol_mem_key
+		@$mol_mem_key
 		item( id: $mol_int62_string ) {
 			return this.fund().Item( id! )
 		}
 
-		@ $mol_mem
+		@$mol_mem
 		items() {
 			return this.ids().map( id => this.item( id! ) )
 		}
 
-		@ $mol_action
+		@$mol_action
 		item_make() {
 			const obj = this.fund().make()
 			this.add( obj.land.id() )
 			return obj
 		}
-		
-		@ $mol_action
-		item_push(obj: InstanceType<Item>) {
+
+		@$mol_action
+		item_push( obj: InstanceType<Item> ) {
 			this.add( obj.land.id() )
 			return obj
 		}
 
-		@ $mol_action
-		item_drop( obj: InstanceType<Item>) {
+		@$mol_action
+		item_drop( obj: InstanceType<Item> ) {
 			this.drop( obj.land.id() )
 		}
 
-		@ $mol_mem_key
+		@$mol_mem_key
 		item_has( obj: InstanceType<Item> ) {
-			return this.has(obj.id())
+			return this.has( obj.id() )
 		}
 
 	}
