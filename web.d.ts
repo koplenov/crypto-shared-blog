@@ -3656,9 +3656,9 @@ declare namespace $ {
         share_icon(): $mol_icon_share;
         Share_note(id: any): $$.$mol_link;
         current_title(id: any, next?: any): string;
+        i_can_mod(id: any): boolean;
         Note_title(id: any): $mol_string_button;
         text(id: any, next?: any): string;
-        i_can_mod(id: any): boolean;
         Input(id: any): $$.$mol_textarea;
         comment_created_moment(id: any): $mol_time_moment;
         Comment_ago(id: any): $$.$hyoo_idea_ago;
@@ -3760,7 +3760,6 @@ declare namespace $ {
 declare namespace $ {
     class $blog_person extends $hyoo_crowd_struct {
         id(): `${string}_${string}`;
-        data(): $hyoo_crowd_struct;
         posts(): $blog_entity_links<typeof $blog_post>;
     }
 }

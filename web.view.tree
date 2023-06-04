@@ -850,18 +850,16 @@ $blog $mol_book2_catalog
 			<= Spread_close
 		Title <= Note_title* $mol_string_button
 			value? <=> current_title*? \Пустой заголовок
+			enabled <= i_can_mod* false
 		title <= current_title*
 		body /
 			<= Input* $mol_textarea
 				value? <=> text*? \
-				enabled <= i_can_mod* false
+				enabled <= i_can_mod*
 				minimal_height 250
 			<= Comments* $mol_list
 				rows <= comment_rows* /
 					<= Comment*0_0 $mol_list rows /
-						- <= Comment_author* $hyoo_idea_person_card
-							person <= comment_author* $hyoo_idea_person
-							actions /
 						<= Name_sub_list* $mol_list rows /
 							<= Comment_ago* $hyoo_idea_ago
 								title \{count} {unit} назад

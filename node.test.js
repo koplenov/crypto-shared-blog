@@ -13553,18 +13553,19 @@ var $;
                 return next;
             return "Пустой заголовок";
         }
+        i_can_mod(id) {
+            return false;
+        }
         Note_title(id) {
             const obj = new this.$.$mol_string_button();
             obj.value = (next) => this.current_title(id, next);
+            obj.enabled = () => this.i_can_mod(id);
             return obj;
         }
         text(id, next) {
             if (next !== undefined)
                 return next;
             return "";
-        }
-        i_can_mod(id) {
-            return false;
         }
         Input(id) {
             const obj = new this.$.$mol_textarea();
@@ -14210,18 +14211,12 @@ var $;
         id() {
             return this.land.id();
         }
-        data() {
-            return this.sub('$blog_posts', $hyoo_crowd_struct);
-        }
         posts() {
             const obj = this.sub('$blog_posts', ($blog_entity_links));
             obj.Item = $blog_post;
             return obj;
         }
     }
-    __decorate([
-        $mol_mem
-    ], $blog_person.prototype, "data", null);
     __decorate([
         $mol_mem
     ], $blog_person.prototype, "posts", null);
