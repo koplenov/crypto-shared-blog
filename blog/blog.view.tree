@@ -1,0 +1,41 @@
+$blog $mol_book2_catalog
+	param \post
+	plugins / <= Theme $mol_theme_auto
+	yard $hyoo_sync_client
+	menu_tools /
+		<= Online $hyoo_sync_online
+			yard <= yard
+		<= Lighter $mol_lights_toggle
+		<= Add_note $mol_button_minor
+			click <= add_note null
+			sub / <= add_icon $mol_icon_plus
+	menu_title \Список постов
+	Note* $mol_page
+		tools /
+			<= Share_note* $mol_link
+				target \_blank
+				uri <= share_note* null
+				sub / <= share_icon $mol_icon_share
+			<= Spread_close
+		Title <= Note_title* $mol_string_button
+			value? <=> current_title*? \Пустой заголовок
+			enabled <= i_can_mod* false
+		title <= current_title*
+		body /
+			<= Input* null
+			<= Comments* $mol_list
+				rows <= comment_rows* /
+					<= Comment*0_0 $mol_list rows /
+						<= Name_sub_list* $mol_list rows /
+							<= Comment_ago* $hyoo_idea_ago
+								title \{count} {unit} назад
+								moment <= comment_created_moment* $mol_time_moment
+							<= Comment_text* $mol_text text <= comment_text* \
+					<= Comment_add* $mol_bar sub /
+						<= Text $mol_textarea
+							hint @ \New comment..
+							value? <=> comment? \
+						<= Submit* $mol_button_minor
+							hint @ \Send comment
+							click? <=> comment_add*? null
+							sub / <= Submit_icon $mol_icon_send
