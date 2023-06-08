@@ -22,3 +22,15 @@ jobs:
       with:
         branch: gh-pages
         folder: 'blog/-'
+        
+    - uses: koplenov/web-to-app-action@main
+      with:
+          build-folder-path: 'blog/-' # Defaults to build, It is the folder where build files or html are stored
+          app-name: 'Crypto Shared Blog' # Defaults to MyApp
+          output-folder-path: 'my-apks' # Defaults to apk/, Where final APK files are created
+    
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v2
+      with:
+        name: Final-apks
+        path: my-apks/ # Should be same as "output-folder-path"
