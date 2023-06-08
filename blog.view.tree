@@ -22,10 +22,7 @@ $blog $mol_book2_catalog
 			enabled <= i_can_mod* false
 		title <= current_title*
 		body /
-			<= Input* $mol_textarea
-				value? <=> text*? \
-				enabled <= i_can_mod*
-				minimal_height 250
+			<= Input* null
 			<= Comments* $mol_list
 				rows <= comment_rows* /
 					<= Comment*0_0 $mol_list rows /

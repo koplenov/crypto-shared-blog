@@ -1,6 +1,23 @@
 namespace $.$$ {
 	export class $blog extends $.$blog {
 
+		@$mol_mem_key
+		Input( id: any ) {
+			let obj
+
+			if( this.i_can_mod( id ) ) {
+				obj = new this.$.$mol_textarea()
+				obj.value = ( next?: any ) => this.text( id, next )
+			}
+			else {
+				obj = new this.$.$mol_text()
+				obj.text = () => this.text( id )
+			}
+
+			obj.minimal_height = () => 250
+			return obj
+		}
+
 		@$mol_mem
 		home() {
 			return this.yard().world().home()
@@ -35,9 +52,9 @@ namespace $.$$ {
 			}, {} as any )
 		}
 
-		@ $mol_mem
+		@$mol_mem
 		Spread() {
-			return (super.Spread() ?? this.spread() !== "" ? this.Note( this.user().posts().item(this.spread() as $mol_int62_string )) : undefined) as any
+			return ( super.Spread() ?? this.spread() !== "" ? this.Note( this.user().posts().item( this.spread() as $mol_int62_string ) ) : undefined ) as any
 		}
 
 		@$mol_action
